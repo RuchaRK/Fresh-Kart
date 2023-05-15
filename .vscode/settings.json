@@ -1,0 +1,21 @@
+{
+  // Note that the settings here take the highest priority. They cannot be overridden by user settings.
+  // Include only those settings that are crucial.
+  "eslint.enable": true,
+  "eslint.lintTask.enable": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.exclude": {
+    "junit*.xml": true,
+    "report*.json": true
+  },
+  "files.insertFinalNewline": true,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": false
+  },
+  "jestrunner.jestCommand": "node_modules/jest/bin/jest.js",
+  "jestrunner.configPath": "jest.config.js",
+  "jestrunner.runOptions": ["--watch", "--env='./config/jest/RkJSDomEnvironment'"]
+}
