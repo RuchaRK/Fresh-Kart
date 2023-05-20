@@ -1,1 +1,5 @@
-export const paths = {};
+export const routeName = {
+  HOME: '/',
+  PRODUCTS: '/products',
+  CART: '/cart',
+};
