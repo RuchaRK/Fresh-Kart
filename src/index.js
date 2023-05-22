@@ -5,6 +5,7 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import {makeServer} from './server';
 import App from './App';
 import {AuthContextProvider} from './Context/AuthContext';
+import {CounterContextProvider} from './Context/CounterContext';
 
 // Call make Server
 makeServer();
@@ -13,7 +14,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <AuthContextProvider>
-        <App />
+        <CounterContextProvider>
+          <App />
+        </CounterContextProvider>
       </AuthContextProvider>
     </Router>
   </React.StrictMode>,

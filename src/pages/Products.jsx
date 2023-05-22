@@ -1,8 +1,11 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {useLocation} from 'react-router-dom';
 import {Container, Content, ContentBox, Filter, FilterOptions, PageTitle} from './Products.style';
+import {getLoginToken} from '../LoginLocalStorage';
+import {v4 as uuid} from 'uuid';
+import {CounterContext} from '../Context/CounterContext';
 
 const MIN_RANGE_VALUE = 15;
 
@@ -16,6 +19,7 @@ function Products() {
   };
   const [productsData, setProductsData] = useState([]);
   const [filterValue, setFilterValue] = useState(initialState);
+  const {setCartCounterValue, setWishListCounterValue} = useContext(CounterContext);
 
   const fetchData = async () => {
     try {
@@ -45,8 +49,6 @@ function Products() {
     }
   };
 
-  console.log(productsData, filterValue.category);
-
   const filteredData = productsData
     .filter((item) => item.price >= MIN_RANGE_VALUE && item.price <= Number(filterValue.range))
     .filter((item) =>
@@ -60,6 +62,31 @@ function Products() {
   if (filterValue.sort === 'dsc') {
     filteredData.sort((a, b) => b.price - a.price);
   }
+
+  const addItemToCart = async (productToAdd) => {
+    try {
+      const response = await fetch('/api/user/cart', {
+        method: 'POST',
+        body: JSON.stringify({
+          product: {
+            ...productToAdd,
+            purchaseQuantity: 1,
+          },
+        }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: getLoginToken(),
+        },
+      });
+      const data = await response.json();
+      if (data.cart.length > 0) {
+        setCartCounterValue(data.cart.length);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Container>
@@ -237,15 +264,15 @@ function Products() {
       </Filter>
 
       <Content>
-        {filteredData.map((product) => (
+        {filteredData.map((goods) => (
           <ContentBox>
-            <p>{product.name} </p>
+            <p>{goods.name} </p>
             <p>
-              {product.quantity} {product.quantityUnit}
+              {goods.quantity} {goods.quantityUnit}
             </p>
-            <p> RS:{product.price}/- </p>
+            <p> RS:{goods.price}/- </p>
             <div>
-              <button>Add to Card</button>
+              <button onClick={() => addItemToCart(goods)}>Add to Card</button>
             </div>
 
             <div>

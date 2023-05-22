@@ -1,7 +1,9 @@
 import React, {useContext, useState} from 'react';
 import styled from '@emotion/styled';
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate, Link} from 'react-router-dom';
 import {AuthContext} from '../Context/AuthContext';
+import {Button} from '../Components/Button';
+import {CounterContext} from '../Context/CounterContext';
 
 const Container = styled.div`
   margin: auto;
@@ -15,13 +17,6 @@ const Container = styled.div`
   gap: 16px;
 `;
 
-const Button = styled.button`
-  width: 100%;
-  height: 30px;
-  border-radius: 5px;
-  background-color: #3a81f5;
-  color: white;
-`;
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -43,6 +38,7 @@ export function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {state} = useLocation();
+  const {setCartCounterValue, setWishListCounterValue} = useContext(CounterContext);
 
   const handleLogin = (token) => {
     login(token);
@@ -65,12 +61,23 @@ export function Login() {
       });
 
       const data = await response.json();
+
+      if (data.errors && data.errors.length > 0) {
+        setIsError(true);
+        return;
+      }
+
+      const cartCount = data.foundUser.cart.length;
+      const wishListCount = data.foundUser.wishlist.length;
+
+      setCartCounterValue(cartCount);
+      setWishListCounterValue(wishListCount);
+
       if (data.encodedToken) {
         handleLogin(data.encodedToken);
       }
     } catch (error) {
-      console.error(error);
-      setIsError(true);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +102,7 @@ export function Login() {
         Password
         <Input
           type="password"
-          placeholder=" Enter Password"
+          placeholder="Enter Password"
           name="password"
           onChange={(event) => {
             setIsError(false);
@@ -105,9 +112,10 @@ export function Login() {
       </InputContainer>
       {isError && <p>Invalid Email or Password</p>}
       <InputContainer>
-        <Button onClick={checkCredentails} disable={isLoading}>
+        <Button onClick={checkCredentails} disabled={isLoading}>
           {isLoading ? 'Login...' : 'Login'}
         </Button>
+        <Link to="/signin">New to Fresh-KART? Create an account.</Link>
       </InputContainer>
     </Container>
   );

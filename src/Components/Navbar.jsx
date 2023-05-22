@@ -5,6 +5,7 @@ import React, {useContext} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {routeName} from '../App.routes';
 import {AuthContext} from '../Context/AuthContext';
+import {CounterContext} from '../Context/CounterContext';
 
 const Title = styled.h1`
   color: green;
@@ -26,6 +27,7 @@ export function Navbar() {
   const {isLoggedIn, logout} = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const {cartCounter, wishlistCounter} = useContext(CounterContext);
 
   return (
     <Header>
@@ -47,6 +49,9 @@ export function Navbar() {
       >
         {isLoggedIn ? 'Logout' : 'Login'}
       </Button>
+
+      <Link to="/cart">Cart {cartCounter} </Link>
+      <Link to="/wishlist">WishList {wishlistCounter}</Link>
     </Header>
   );
 }
