@@ -1,10 +1,13 @@
 import * as React from 'react';
+import {useState} from 'react';
+import {getLoginToken} from '../LoginLocalStorage';
 
 export const CounterContext = React.createContext();
 
 export function CounterContextProvider({children}) {
   const [cartCounter, setCartCounter] = React.useState(0);
   const [wishlistCounter, setWishListCounter] = React.useState(0);
+  const [cartData, setCartData] = useState([]);
 
   const setCartCounterValue = (countValue) => {
     setCartCounter(countValue);
@@ -13,20 +16,78 @@ export function CounterContextProvider({children}) {
     setWishListCounter(countValue);
   };
 
-  const increaseCartCounter = () => {
-    setCartCounter(cartCounter + 1);
+  const incrementQuantity = async (idValue, incrementType) => {
+    console.log('inside increment');
+
+    try {
+      const response = await fetch(`/api/user/cart/${idValue}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          action: {
+            type: incrementType,
+          },
+        }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: getLoginToken(),
+        },
+      });
+
+      const data = await response.json();
+      setCartData(data.cart);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const decreaseCartCounter = () => {
-    setCartCounter(cartCounter - 1);
+  const addItemToCart = async (productToAdd) => {
+    try {
+      const response = await fetch('/api/user/cart', {
+        method: 'POST',
+        body: JSON.stringify({
+          product: {
+            ...productToAdd,
+          },
+        }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: getLoginToken(),
+        },
+      });
+      const data = await response.json();
+      if (data.cart.length > 0) {
+        setCartCounterValue(data.cart.length);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const increaseWishListCounter = () => {
-    setWishListCounter(cartCounter + 1);
-  };
+  const addItemToWishlist = async (productToAdd) => {
+    try {
+      const response = await fetch('/api/user/wishlist', {
+        method: 'POST',
+        body: JSON.stringify({
+          product: {
+            ...productToAdd,
+          },
+        }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: getLoginToken(),
+        },
+      });
+      const data = await response.json();
 
-  const decreaseWishListCounter = () => {
-    setWishListCounter(cartCounter - 1);
+      if (data.wishlist.length > 0) {
+        setWishListCounterValue(data.wishlist.length);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -36,12 +97,13 @@ export function CounterContextProvider({children}) {
         value={{
           cartCounter,
           wishlistCounter,
-          increaseCartCounter,
-          decreaseCartCounter,
-          increaseWishListCounter,
-          decreaseWishListCounter,
+          cartData,
+          setCartData,
+          incrementQuantity,
           setCartCounterValue,
           setWishListCounterValue,
+          addItemToCart,
+          addItemToWishlist,
         }}
       >
         {children}

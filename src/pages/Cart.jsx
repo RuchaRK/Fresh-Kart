@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/button-has-type */
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {getLoginToken} from '../LoginLocalStorage';
 import {CounterContext} from '../Context/CounterContext';
 
 export function Cart() {
-  const [cartData, setCartData] = useState([]);
-  const {cartCounter} = useContext(CounterContext);
+  const {setCartCounterValue, setWishListCounterValue, cartData, setCartData, incrementQuantity} =
+    useContext(CounterContext);
 
   const fetchCartData = async () => {
     try {
@@ -20,7 +20,6 @@ export function Cart() {
         },
       });
       const data = await response.json();
-      console.log('Cartdata -', data);
       setCartData(data.cart);
     } catch (error) {
       console.error(error);
@@ -32,13 +31,31 @@ export function Cart() {
     console.log(cartData);
   }, []);
 
-  const incrementQuantity = async (idValue, incrementType) => {
+  const removeFromCart = async (idValue) => {
     try {
       const response = await fetch(`/api/user/cart/${idValue}`, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: getLoginToken(),
+        },
+      });
+      const data = await response.json();
+      setCartData(data.cart);
+      setCartCounterValue(data.cart.length);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addItemToWishlist = async (productToAdd) => {
+    try {
+      const response = await fetch('/api/user/wishlist', {
         method: 'POST',
         body: JSON.stringify({
-          action: {
-            type: incrementType,
+          product: {
+            ...productToAdd,
           },
         }),
         headers: {
@@ -47,10 +64,11 @@ export function Cart() {
           authorization: getLoginToken(),
         },
       });
-
       const data = await response.json();
-      setCartData(data.cart);
-      console.log(data.cart);
+
+      if (data.wishlist.length > 0) {
+        setWishListCounterValue(data.wishlist.length);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -71,11 +89,18 @@ export function Cart() {
           <button onClick={() => incrementQuantity(productDetails._id, 'increment')}>➕</button>
 
           <div>
-            <button> Remove From Cart</button>
+            <button onClick={() => removeFromCart(productDetails._id)}> Remove From Cart</button>
           </div>
 
           <div>
-            <button> Move to WishList</button>
+            <button
+              onClick={() => {
+                addItemToWishlist(productDetails);
+                removeFromCart(productDetails._id);
+              }}
+            >
+              Move to WishList
+            </button>
           </div>
           <hr />
         </div>

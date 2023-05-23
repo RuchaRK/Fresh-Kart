@@ -1,11 +1,22 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, {useEffect, useState, useContext} from 'react';
-import {useLocation} from 'react-router-dom';
-import {Container, Content, ContentBox, Filter, FilterOptions, PageTitle} from './Products.style';
-import {getLoginToken} from '../LoginLocalStorage';
-import {v4 as uuid} from 'uuid';
+import {AiOutlineHeart, AiFillHeart, AiOutlineShoppingCart} from 'react-icons/ai';
+import {Link, useLocation} from 'react-router-dom';
+import {
+  Container,
+  Content,
+  ContentBox,
+  Filter,
+  FilterOptions,
+  PageTitle,
+  Button,
+  CardContainer,
+  IconContainer,
+  IconButtonRed,
+} from './Products.style';
 import {CounterContext} from '../Context/CounterContext';
+import {routeName} from '../App.routes';
 
 const MIN_RANGE_VALUE = 15;
 
@@ -19,7 +30,8 @@ function Products() {
   };
   const [productsData, setProductsData] = useState([]);
   const [filterValue, setFilterValue] = useState(initialState);
-  const {setCartCounterValue, setWishListCounterValue} = useContext(CounterContext);
+  const {setCartCounterValue, setWishListCounterValue, addItemToCart, addItemToWishlist, cartData} =
+    useContext(CounterContext);
 
   const fetchData = async () => {
     try {
@@ -62,31 +74,6 @@ function Products() {
   if (filterValue.sort === 'dsc') {
     filteredData.sort((a, b) => b.price - a.price);
   }
-
-  const addItemToCart = async (productToAdd) => {
-    try {
-      const response = await fetch('/api/user/cart', {
-        method: 'POST',
-        body: JSON.stringify({
-          product: {
-            ...productToAdd,
-            purchaseQuantity: 1,
-          },
-        }),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          authorization: getLoginToken(),
-        },
-      });
-      const data = await response.json();
-      if (data.cart.length > 0) {
-        setCartCounterValue(data.cart.length);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <Container>
@@ -265,20 +252,41 @@ function Products() {
 
       <Content>
         {filteredData.map((goods) => (
-          <ContentBox>
-            <p>{goods.name} </p>
-            <p>
-              {goods.quantity} {goods.quantityUnit}
-            </p>
-            <p> RS:{goods.price}/- </p>
-            <div>
-              <button onClick={() => addItemToCart(goods)}>Add to Card</button>
-            </div>
+          <>
+            <CardContainer>
+              <div>
+                <img src={goods.image} height="200px" width="200px" alt={goods.name} />
+              </div>
+              <h3 style={{margin: '10px 5px'}}>{goods.name} </h3>
+              <h5 style={{margin: '10px 5px'}}>
+                {goods.quantity} {goods.quantityUnit}
+              </h5>
+              <p style={{margin: '10px 5px'}}>
+                <span>&#8377;</span> : {goods.price}/-
+              </p>
 
-            <div>
-              <button>Add to WishList</button>
-            </div>
-          </ContentBox>
+              {cartData.find((item) => item._id === goods._id) ? (
+                <Link to={routeName.CART}>Go to Cart</Link>
+              ) : (
+                <Button onClick={() => addItemToCart(goods)}> 🛒 Add To Cart</Button>
+              )}
+              <div></div>
+
+              <IconContainer>
+                <IconButtonRed>
+                  <button
+                    onClick={() => addItemToWishlist(goods)}
+                    style={{border: 'none', borderRadius: '50%'}}
+                  >
+                    <AiOutlineHeart fill="red" size={25} />
+                  </button>
+
+                  {/* <AiFillHeart fill="red" /> */}
+                  {/* <AiOutlineClose /> */}
+                </IconButtonRed>
+              </IconContainer>
+            </CardContainer>
+          </>
         ))}
       </Content>
     </Container>

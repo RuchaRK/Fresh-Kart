@@ -14,6 +14,7 @@ export const products = [
     price: 25,
     categoryName: 'Vegetables',
     rating: 4.6,
+    image: 'https://farmersfz.com/assets/public/vegimg/BGON8.jpg',
   },
   {
     _id: uuid(),
@@ -23,6 +24,7 @@ export const products = [
     price: 16,
     categoryName: 'Vegetables',
     rating: 3.7,
+    image: 'https://m.media-amazon.com/images/I/4109t2-iaPL._SX425_.jpg',
   },
   {
     _id: uuid(),
@@ -32,6 +34,7 @@ export const products = [
     price: 15,
     categoryName: 'Vegetables',
     rating: 4.7,
+    image: 'https://cdn.shopify.com/s/files/1/0244/4961/3905/products/okra.jpg?v=1576806732',
   },
   {
     _id: uuid(),
@@ -41,6 +44,8 @@ export const products = [
     price: 15,
     categoryName: 'Vegetables',
     rating: 3.4,
+    image:
+      'https://cdn.shopify.com/s/files/1/0104/1059/0266/products/Organic-Green-Chilli_large_large_4410288b-ff46-4d7d-8e6b-f9c5775a0d27.jpg?v=1571986449',
   },
   {
     _id: uuid(),
@@ -50,6 +55,8 @@ export const products = [
     price: 44,
     categoryName: 'Vegetables',
     rating: 2.6,
+    image:
+      'https://5.imimg.com/data5/PI/KX/MY-46595757/fresh-spinach-28palak-29-281kg-29-500x500.png',
   },
 
   {
@@ -60,6 +67,8 @@ export const products = [
     price: 31,
     categoryName: 'Fruits',
     rating: 2.3,
+    image:
+      'https://media.istockphoto.com/id/173242750/photo/banana-bunch.jpg?s=612x612&w=0&k=20&c=MAc8AXVz5KxwWeEmh75WwH6j_HouRczBFAhulLAtRUU=',
   },
   {
     _id: uuid(),
@@ -69,6 +78,8 @@ export const products = [
     price: 31,
     categoryName: 'Fruits',
     rating: 3.3,
+    image:
+      'https://images.healthshots.com/healthshots/en/uploads/2021/09/27184641/pomegranate-1600x900.jpg',
   },
   {
     _id: uuid(),
@@ -78,6 +89,8 @@ export const products = [
     price: 47,
     categoryName: 'Fruits',
     rating: 3.6,
+    image:
+      'https://static.toiimg.com/thumb/msid-82063460,width-1070,height-580,imgsize-1093339,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg',
   },
   {
     _id: uuid(),
@@ -86,6 +99,9 @@ export const products = [
     quantity: '1000',
     price: 64,
     categoryName: 'Fruits',
+    rating: 3.6,
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAy71WRIKR0JMdAkldQJILTxBl1VaACAAsWw&usqp=CAU',
   },
   {
     _id: uuid(),
@@ -94,6 +110,9 @@ export const products = [
     quantity: '1000',
     price: 80,
     categoryName: 'Fruits',
+    rating: 4.9,
+    image:
+      'https://images.ctfassets.net/5djn6ve9uecf/5Avz4k2vOTFbphDuUTcQm7/eee72c2cc2e043b8a430268b46e5c3c2/Kesar_shutterstock_1708900531_copy.jpg',
   },
 
   // all bakery products are in gram
@@ -105,6 +124,8 @@ export const products = [
     price: 55,
     categoryName: 'Bakery and Biscuits',
     rating: 1.5,
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Fresh_made_bread_05.jpg/1200px-Fresh_made_bread_05.jpg',
   },
   {
     _id: uuid(),

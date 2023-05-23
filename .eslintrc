@@ -10,7 +10,8 @@
     "react/jsx-filename-extension": ["off"],
     "react/react-in-jsx-scope": ["off"],
     "import/no-extraneous-dependencies": ["off"],
-    "import/prefer-default-export": ["off"]
+    "import/prefer-default-export": ["off"],
+    "react/button-has-type": ["off"]
   },
   "root": true,
   "ignorePatterns": ["src/backend/", "src/server.js"],

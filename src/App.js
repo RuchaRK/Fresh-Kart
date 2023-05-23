@@ -24,7 +24,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
 
           <Route
-            path="/cart"
+            path={routeName.CART}
             element={
               <RequiresAuth>
                 <Cart />

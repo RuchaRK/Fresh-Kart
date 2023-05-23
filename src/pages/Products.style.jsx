@@ -39,7 +39,7 @@ export const Content = styled.div`
 
 export const ContentBox = styled.div`
   border: 1px solid purple;
-  height: 200px;
+  height: 350px;
   width: 289px;
 `;
 
@@ -55,4 +55,44 @@ export const SliderContainer = styled.input`
   background: red;
   width: 200px;
   height: 60px;
+`;
+
+export const Button = styled.button`
+  border-radius: 10px;
+  background-color: #008cba;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+`;
+
+export const CardContainer = styled.div`
+  position: relative;
+  border: 1px solid purple;
+  height: 360px;
+  width: 270px;
+`;
+
+export const IconContainer = styled.span`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+`;
+
+export const IconButtonRed = styled.span`
+  border-radius: 50%;
+  padding: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    /* color hex code - #f90909 opacity - 20 */
+    background: #f9090920;
+  }
 `;

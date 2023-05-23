@@ -8,7 +8,6 @@ export const Container = styled.div`
 `;
 
 export const CategoryBox = styled.div`
-  border: 1px solid orange;
   border-radius: 5px;
   height: 200px;
   width: 300px;

@@ -23,17 +23,26 @@ export function Home() {
 
   return (
     <div>
-      <Img src="./images/veggies.jpg" alt="Vegetables" />
+      <Img
+        src="https://cdn.cheapism.com/images/iStock-990558492.48a8c921.fill-1440x605.jpg"
+        alt="Vegetables"
+      />
 
       <Title>Our Categories</Title>
       <TitleUnderline />
       <Container>
         {/* <Link to={routeName.PRODUCTS}>Products </Link> */}
 
-        {category.map(({categoryName}) => (
+        {category.map(({categoryName, image}) => (
           <CategoryBox>
-            <Link to={routeName.PRODUCTS} state={{category: categoryName}}>
-              {categoryName}
+            <img src={image} height="200px" width="300px" alt={categoryName} />
+
+            <Link
+              to={routeName.PRODUCTS}
+              state={{category: categoryName}}
+              style={{textDecoration: 'none'}}
+            >
+              <h2> {categoryName} </h2>
             </Link>
           </CategoryBox>
         ))}
