@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {useState} from 'react';
+import {ToastContainer, toast} from 'react-toastify';
 import {getLoginToken} from '../LoginLocalStorage';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const CounterContext = React.createContext();
 
@@ -17,8 +19,6 @@ export function CounterContextProvider({children}) {
   };
 
   const incrementQuantity = async (idValue, incrementType) => {
-    console.log('inside increment');
-
     try {
       const response = await fetch(`/api/user/cart/${idValue}`, {
         method: 'POST',

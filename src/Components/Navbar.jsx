@@ -20,7 +20,7 @@ const Header = styled.div`
   height: 80px;
 `;
 
-const Button = styled.button`
+const PrimaryButton = styled.button`
   border-radius: 5px;
   background-color: white; /* Green */
   border: 1px solid #008cba;
@@ -95,7 +95,7 @@ export function Navbar() {
       </div>
 
       <IconContainer>
-        <Button
+        <PrimaryButton
           onClick={() => {
             if (isLoggedIn) {
               logout();
@@ -105,7 +105,7 @@ export function Navbar() {
           }}
         >
           {isLoggedIn ? 'Logout' : 'Login'}
-        </Button>
+        </PrimaryButton>
 
         <IconCounterWrapper>
           <IconCounter>{wishlistCounter}</IconCounter>

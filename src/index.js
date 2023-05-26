@@ -6,6 +6,7 @@ import {makeServer} from './server';
 import App from './App';
 import {AuthContextProvider} from './Context/AuthContext';
 import {CounterContextProvider} from './Context/CounterContext';
+import {ProductContextProvider} from './Context/ProductContext';
 
 // Call make Server
 makeServer();
@@ -15,7 +16,9 @@ ReactDOM.render(
     <Router>
       <AuthContextProvider>
         <CounterContextProvider>
-          <App />
+          <ProductContextProvider>
+            <App />
+          </ProductContextProvider>
         </CounterContextProvider>
       </AuthContextProvider>
     </Router>

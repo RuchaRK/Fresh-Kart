@@ -10,7 +10,6 @@ export const Container = styled.div`
 
 export const Filter = styled.div`
   flex: 0.3;
-  border: 2px solid green;
   height: 100%;
   display: flex;
   align-items: flex-start;
@@ -29,7 +28,7 @@ export const FilterOptions = styled.div`
 
 export const Content = styled.div`
   flex: 0.7;
-  border: 3px solid red;
+  // border: 3px solid red;
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -37,17 +36,11 @@ export const Content = styled.div`
   overflow: hidden auto;
 `;
 
-export const ContentBox = styled.div`
-  border: 1px solid purple;
-  height: 350px;
-  width: 289px;
-`;
-
 export const PageTitle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  width: 70%;
   align-items: baseline;
 `;
 
@@ -57,7 +50,7 @@ export const SliderContainer = styled.input`
   height: 60px;
 `;
 
-export const Button = styled.button`
+export const SecondaryButton = styled.button`
   border-radius: 10px;
   background-color: #008cba;
   border: none;
@@ -73,9 +66,9 @@ export const Button = styled.button`
 
 export const CardContainer = styled.div`
   position: relative;
-  border: 1px solid purple;
-  height: 360px;
+  height: 400px;
   width: 270px;
+  curser: pointer;
 `;
 
 export const IconContainer = styled.span`
@@ -95,4 +88,17 @@ export const IconButtonRed = styled.span`
     /* color hex code - #f90909 opacity - 20 */
     background: #f9090920;
   }
+`;
+
+export const ClearButton = styled.button`
+  background-color: white; /* Green */
+  border: none;
+  color: #008cba;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
 `;

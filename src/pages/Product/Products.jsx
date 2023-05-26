@@ -1,26 +1,27 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, {useEffect, useState, useContext} from 'react';
-import {AiOutlineHeart, AiFillHeart, AiOutlineShoppingCart} from 'react-icons/ai';
+import {AiOutlineHeart, AiFillHeart} from 'react-icons/ai';
 import {Link, useLocation} from 'react-router-dom';
 import {
   Container,
   Content,
-  ContentBox,
   Filter,
   FilterOptions,
   PageTitle,
-  Button,
+  SecondaryButton,
   CardContainer,
   IconContainer,
   IconButtonRed,
+  ClearButton,
 } from './Products.style';
-import {CounterContext} from '../Context/CounterContext';
-import {routeName} from '../App.routes';
+import {CounterContext} from '../../Context/CounterContext';
+import {routeName} from '../../App.routes';
+import {ProductContext} from '../../Context/ProductContext';
 
 const MIN_RANGE_VALUE = 15;
 
-function Products() {
+export const Products = () => {
   const {state} = useLocation();
   const initialState = {
     range: 500,
@@ -28,10 +29,9 @@ function Products() {
     rating: 0,
     sort: '',
   };
-  const [productsData, setProductsData] = useState([]);
+  const {productsData, setProductsData} = useContext(ProductContext);
   const [filterValue, setFilterValue] = useState(initialState);
-  const {setCartCounterValue, setWishListCounterValue, addItemToCart, addItemToWishlist, cartData} =
-    useContext(CounterContext);
+  const {addItemToCart, addItemToWishlist, cartData} = useContext(CounterContext);
 
   const fetchData = async () => {
     try {
@@ -80,7 +80,9 @@ function Products() {
       <Filter>
         <PageTitle>
           <h2>Filters</h2>
-          <button onClick={() => setFilterValue({...initialState, category: []})}>Clear</button>
+          <ClearButton onClick={() => setFilterValue({...initialState, category: []})}>
+            CLEAR ALL
+          </ClearButton>
         </PageTitle>
 
         <FilterOptions>
@@ -254,10 +256,15 @@ function Products() {
         {filteredData.map((goods) => (
           <>
             <CardContainer>
-              <div>
-                <img src={goods.image} height="200px" width="200px" alt={goods.name} />
+              <div style={{margin: '15px 0px'}}>
+                <Link to={`/products/${goods._id}`} style={{textDecoration: 'none'}}>
+                  <img src={goods.image} height="200px" width="200px" alt={goods.name} />
+                </Link>
               </div>
-              <h3 style={{margin: '10px 5px'}}>{goods.name} </h3>
+              <Link to={`/products/${goods._id}`} style={{textDecoration: 'none'}}>
+                <h3 style={{margin: '10px 5px'}}>{goods.name} </h3>
+              </Link>
+
               <h5 style={{margin: '10px 5px'}}>
                 {goods.quantity} {goods.quantityUnit}
               </h5>
@@ -268,9 +275,10 @@ function Products() {
               {cartData.find((item) => item._id === goods._id) ? (
                 <Link to={routeName.CART}>Go to Cart</Link>
               ) : (
-                <Button onClick={() => addItemToCart(goods)}> 🛒 Add To Cart</Button>
+                <SecondaryButton onClick={() => addItemToCart(goods)}>
+                  🛒 Add To Cart
+                </SecondaryButton>
               )}
-              <div></div>
 
               <IconContainer>
                 <IconButtonRed>
@@ -291,6 +299,6 @@ function Products() {
       </Content>
     </Container>
   );
-}
+};
 
 export default Products;

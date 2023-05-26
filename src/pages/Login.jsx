@@ -4,6 +4,7 @@ import {useLocation, useNavigate, Link} from 'react-router-dom';
 import {AuthContext} from '../Context/AuthContext';
 import {Button} from '../Components/Button';
 import {CounterContext} from '../Context/CounterContext';
+import {ToastContainer, toast} from 'react-toastify';
 
 const Container = styled.div`
   margin: auto;

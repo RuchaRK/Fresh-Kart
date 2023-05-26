@@ -15,6 +15,7 @@ export const products = [
     categoryName: 'Vegetables',
     rating: 4.6,
     image: 'https://farmersfz.com/assets/public/vegimg/BGON8.jpg',
+    discount: 10,
   },
   {
     _id: uuid(),
@@ -55,8 +56,12 @@ export const products = [
     price: 44,
     categoryName: 'Vegetables',
     rating: 2.6,
+    description: 'Cleaned and Packed without roots.',
+    shelfLife: '3 Days',
+    packageWith: 'Roll in a Paper Towel',
     image:
       'https://5.imimg.com/data5/PI/KX/MY-46595757/fresh-spinach-28palak-29-281kg-29-500x500.png',
+    discount: 22,
   },
 
   {
@@ -77,7 +82,7 @@ export const products = [
     quantity: '1000',
     price: 31,
     categoryName: 'Fruits',
-    rating: 3.3,
+    rating: 1.3,
     image:
       'https://images.healthshots.com/healthshots/en/uploads/2021/09/27184641/pomegranate-1600x900.jpg',
   },
@@ -88,9 +93,8 @@ export const products = [
     quantity: '1',
     price: 47,
     categoryName: 'Fruits',
-    rating: 3.6,
-    image:
-      'https://static.toiimg.com/thumb/msid-82063460,width-1070,height-580,imgsize-1093339,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg',
+    rating: 2.6,
+    image: 'https://kumaribasket.com/wp-content/uploads/2021/01/Tender-Coconut2.jpg',
   },
   {
     _id: uuid(),
@@ -99,7 +103,7 @@ export const products = [
     quantity: '1000',
     price: 64,
     categoryName: 'Fruits',
-    rating: 3.6,
+    rating: 1.6,
     image:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAy71WRIKR0JMdAkldQJILTxBl1VaACAAsWw&usqp=CAU',
   },
@@ -134,7 +138,8 @@ export const products = [
     quantity: '400',
     price: 50,
     categoryName: 'Bakery and Biscuits',
-    rating: 3.5,
+    rating: 3.2,
+    image: 'https://www.goldmedalbakery.com/content/uploads/2019/12/Sandwich-White.jpg',
   },
   {
     _id: uuid(),
@@ -143,7 +148,9 @@ export const products = [
     quantity: '1',
     price: 229,
     categoryName: 'Bakery and Biscuits',
-    rating: 4.8,
+    rating: 2.8,
+    image:
+      'https://cdn.shopify.com/s/files/1/0511/2158/6327/products/AssortedCroissantBox1_1024x.jpg?v=1644310793',
   },
   {
     _id: uuid(),
@@ -152,6 +159,9 @@ export const products = [
     quantity: '150',
     price: 70,
     categoryName: 'Bakery and Biscuits',
+    rating: 3.7,
+    image:
+      'https://www.kingarthurbaking.com/sites/default/files/styles/featured_image/public/recipe_legacy/9027-3-large.jpg?itok=cYIGvAGS',
   },
   {
     _id: uuid(),
@@ -160,6 +170,9 @@ export const products = [
     quantity: '1',
     price: 230,
     categoryName: 'Bakery and Biscuits',
+    rating: 2.5,
+    image:
+      'https://d1z88p83zuviay.cloudfront.net/ProductVariantImages/3c95f219-2ccc-47fa-817f-bdb948cb574f.jpg',
   },
 
   {
@@ -169,6 +182,8 @@ export const products = [
     quantity: '200',
     price: 181,
     categoryName: 'Dry-Fruits',
+    rating: 3.5,
+    image: 'https://m.media-amazon.com/images/I/51ODBfoqozL.jpg',
   },
   {
     _id: uuid(),
@@ -177,6 +192,8 @@ export const products = [
     quantity: '200',
     price: 210,
     categoryName: 'Dry-Fruits',
+    rating: 2.8,
+    image: 'https://dspices.in/image/cache/catalog/products/cashew/cw_1-800x800.jpg',
   },
   {
     _id: uuid(),
@@ -186,6 +203,7 @@ export const products = [
     price: 62,
     categoryName: 'Dry-Fruits',
     rating: 2.5,
+    image: 'https://www.dryfruitshome.com/wp-content/uploads/2020/10/munakka.jpg',
   },
   {
     _id: uuid(),
@@ -195,6 +213,7 @@ export const products = [
     price: 272,
     categoryName: 'Dry-Fruits',
     rating: 2.8,
+    image: 'https://indiacuisine.net/cdn/shop/products/PISTA.jpg?v=1615638822',
   },
   {
     _id: uuid(),
@@ -204,6 +223,7 @@ export const products = [
     price: 365,
     categoryName: 'Dry-Fruits',
     rating: 1.3,
+    image: 'https://m.media-amazon.com/images/I/51h1HtbZYWL.jpg',
   },
 
   {
@@ -213,6 +233,8 @@ export const products = [
     quantity: '500',
     price: 33,
     categoryName: 'Dairy',
+    rating: 1.9,
+    image: 'https://foodsguy.com/wp-content/uploads/2022/04/Milk.jpg',
   },
   {
     _id: uuid(),
@@ -222,6 +244,7 @@ export const products = [
     price: 138,
     categoryName: 'Dairy',
     rating: 2.6,
+    image: 'https://gourmet-foods.in/wp-content/uploads/2021/07/sliced-cheese-500x500-1.jpg',
   },
   {
     _id: uuid(),
@@ -230,6 +253,9 @@ export const products = [
     quantity: '200',
     price: 91,
     categoryName: 'Dairy',
+    rating: 3.6,
+    image:
+      'https://5.imimg.com/data5/ANDROID/Default/2022/10/GI/MP/QC/100746515/product-jpeg-500x500.jpg',
   },
   {
     _id: uuid(),
@@ -238,6 +264,9 @@ export const products = [
     quantity: '200',
     price: 114,
     categoryName: 'Dairy',
+    rating: 4.3,
+    image:
+      'https://www.southernliving.com/thmb/S3jnGzbVG4VUSMFqU-Ohjw3pdFE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/butter_cutting_board-179875636-2000-14b4ec54a0a64d2f8c884822acb68415.jpg',
   },
   {
     _id: uuid(),
@@ -246,5 +275,39 @@ export const products = [
     quantity: '500',
     price: 22,
     categoryName: 'Dairy',
+    rating: 1.3,
+    image:
+      'https://static.wixstatic.com/media/cdf1d3_a7c86a153904481faa5bde2eb5b1f88b~mv2.jpg/v1/fill/w_601,h_600,al_c,q_85/cdf1d3_a7c86a153904481faa5bde2eb5b1f88b~mv2.jpg',
+  },
+  {
+    _id: uuid(),
+    name: 'Healthy Daily Eggs',
+    quantityUnit: 'pcs',
+    quantity: '6',
+    price: 90,
+    categoryName: 'Eggs-Meat-Fish',
+    rating: 2.3,
+    image: 'https://www.netojin.com/wp-content/uploads/2022/02/egg.jpg',
+  },
+  {
+    _id: uuid(),
+    name: 'Healthy Brown Eggs',
+    quantityUnit: 'pcs',
+    quantity: '6',
+    price: 90,
+    categoryName: 'Eggs-Meat-Fish',
+    rating: 2.4,
+    image:
+      'https://cdn3.mydukaan.io/app/image/1000x1000/?url=https://projecteagle.s3.ap-south-1.amazonaws.com/images/9fe6f688-d136-4b98-a531-7a1d5084fffd.jpg',
+  },
+  {
+    _id: uuid(),
+    name: 'Frozon Shrimp',
+    quantityUnit: 'gram',
+    quantity: '250',
+    price: 1295,
+    categoryName: 'Eggs-Meat-Fish',
+    rating: 2.4,
+    image: '',
   },
 ];
