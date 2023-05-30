@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, {useEffect, useState, useContext} from 'react';
-import {AiOutlineHeart, AiFillHeart} from 'react-icons/ai';
+import {AiOutlineHeart, AiFillHeart, AiOutlineShoppingCart} from 'react-icons/ai';
 import {Link, useLocation} from 'react-router-dom';
 import {
   Container,
@@ -14,6 +14,11 @@ import {
   IconContainer,
   IconButtonRed,
   ClearButton,
+  ActualPrice,
+  DiscountPrice,
+  PriceContainer,
+  ShowDiscount,
+  Data,
 } from './Products.style';
 import {CounterContext} from '../../Context/CounterContext';
 import {routeName} from '../../App.routes';
@@ -31,7 +36,8 @@ export const Products = () => {
   };
   const {productsData, setProductsData} = useContext(ProductContext);
   const [filterValue, setFilterValue] = useState(initialState);
-  const {addItemToCart, addItemToWishlist, cartData} = useContext(CounterContext);
+  const {addItemToCart, addItemToWishlist, cartData, wishListData, removeFromWishlist} =
+    useContext(CounterContext);
 
   const fetchData = async () => {
     try {
@@ -253,49 +259,87 @@ export const Products = () => {
       </Filter>
 
       <Content>
-        {filteredData.map((goods) => (
-          <>
-            <CardContainer>
-              <div style={{margin: '15px 0px'}}>
-                <Link to={`/products/${goods._id}`} style={{textDecoration: 'none'}}>
-                  <img src={goods.image} height="200px" width="200px" alt={goods.name} />
-                </Link>
-              </div>
-              <Link to={`/products/${goods._id}`} style={{textDecoration: 'none'}}>
-                <h3 style={{margin: '10px 5px'}}>{goods.name} </h3>
-              </Link>
+        {filteredData.map((goods) => {
+          console.log(
+            cartData.find((item) => item._id === goods._id),
+            goods,
+            cartData,
+          );
 
-              <h5 style={{margin: '10px 5px'}}>
-                {goods.quantity} {goods.quantityUnit}
-              </h5>
-              <p style={{margin: '10px 5px'}}>
-                <span>&#8377;</span> : {goods.price}/-
-              </p>
+          console.log(productsData);
+          return (
+            <>
+              <CardContainer>
+                <div style={{margin: '15px 0px'}}>
+                  <Link to={`/products/${goods._id}`} style={{textDecoration: 'none'}}>
+                    <img src={goods.image} height="200px" width="200px" alt={goods.name} />
+                  </Link>
+                </div>
 
-              {cartData.find((item) => item._id === goods._id) ? (
-                <Link to={routeName.CART}>Go to Cart</Link>
-              ) : (
-                <SecondaryButton onClick={() => addItemToCart(goods)}>
-                  🛒 Add To Cart
-                </SecondaryButton>
-              )}
+                <Data>
+                  <Link to={`/products/${goods._id}`} style={{textDecoration: 'none'}}>
+                    <h3 style={{margin: '10px 5px'}}>{goods.name} </h3>
+                  </Link>
 
-              <IconContainer>
-                <IconButtonRed>
-                  <button
-                    onClick={() => addItemToWishlist(goods)}
+                  <h5 style={{margin: '10px 5px'}}>
+                    {goods.quantity} {goods.quantityUnit}
+                  </h5>
+
+                  <PriceContainer>
+                    <DiscountPrice>
+                      <span>&#8377;</span>
+                      {Math.round((goods.price - (goods.price * goods.discount) / 100) * 1)}
+                    </DiscountPrice>
+                    <ActualPrice>
+                      <span>&#8377;</span> : {goods.price}/-
+                    </ActualPrice>
+                    <ShowDiscount> ({goods.discount}% OFF)</ShowDiscount>
+                  </PriceContainer>
+
+                  {cartData.find((item) => item._id === goods._id) ? (
+                    <SecondaryButton>
+                      <Link
+                        to={routeName.CART}
+                        style={{
+                          textDecoration: 'none',
+                          color: 'white',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                        }}
+                      >
+                        Go to Cart <AiOutlineShoppingCart size={16} />
+                      </Link>
+                    </SecondaryButton>
+                  ) : (
+                    <SecondaryButton onClick={() => addItemToCart(goods)}>
+                      <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                        Add To Cart <AiOutlineShoppingCart size={16} />
+                      </div>
+                    </SecondaryButton>
+                  )}
+                </Data>
+
+                <IconContainer>
+                  <IconButtonRed
+                    onClick={() =>
+                      wishListData.find((item) => item._id === goods._id)
+                        ? removeFromWishlist(goods._id)
+                        : addItemToWishlist(goods)
+                    }
                     style={{border: 'none', borderRadius: '50%'}}
                   >
-                    <AiOutlineHeart fill="red" size={25} />
-                  </button>
-
-                  {/* <AiFillHeart fill="red" /> */}
-                  {/* <AiOutlineClose /> */}
-                </IconButtonRed>
-              </IconContainer>
-            </CardContainer>
-          </>
-        ))}
+                    {wishListData.find((item) => item._id === goods._id) ? (
+                      <AiFillHeart fill="red" size={25} />
+                    ) : (
+                      <AiOutlineHeart fill="red" size={25} />
+                    )}
+                  </IconButtonRed>
+                </IconContainer>
+              </CardContainer>
+            </>
+          );
+        })}
       </Content>
     </Container>
   );

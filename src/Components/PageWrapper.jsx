@@ -6,9 +6,8 @@ import {Navbar} from './Navbar';
 
 const PageItem = styled.div`
   padding: 32px 100px;
-  background: #fafafa;
+  background: rgb(246, 246, 244);
   height: calc(100% - 80px);
-  overflow: auto;
 `;
 
 export function PageWrapper({children}) {

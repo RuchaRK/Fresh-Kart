@@ -1,6 +1,7 @@
 import './App.css';
 import Mockman from 'mockman-js';
 import {Route, Routes} from 'react-router-dom';
+import {ToastContainer} from 'react-toastify';
 import {Home} from './pages/Home/Home';
 import {routeName} from './App.routes';
 import {Products} from './pages/Product/Products';
@@ -11,6 +12,8 @@ import {Login} from './pages/Login';
 import {RequiresAuth} from './Components/RequiresAuth';
 import {SignIn} from './pages/SignIn';
 import {ProductDetail} from './pages/Product/ProductDetail';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -42,6 +45,7 @@ function App() {
           />
         </Routes>
       </PageWrapper>
+      <ToastContainer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {useParams} from 'react-router-dom';
-import {AiFillStar, AiFillHeart, AiOutlineShoppingCart, AiOutlineStar} from 'react-icons/ai';
+import {AiFillStar, AiFillHeart, AiOutlineShoppingCart} from 'react-icons/ai';
 import {ProductContext} from '../../Context/ProductContext';
 import {
   ShowProduct,
@@ -54,7 +54,9 @@ export function ProductDetail() {
         <DiscountPrice>
           Selling Price:
           <span>&#8377;</span>
-          {Math.round((productToShow.price - (productToShow.price * 10) / 100) * 1)}
+          {Math.round(
+            (productToShow.price - (productToShow.price * productToShow.discount) / 100) * 1,
+          )}
         </DiscountPrice>
 
         <InfoStyle>

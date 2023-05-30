@@ -16,8 +16,12 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 15px;
-  margin: 0px 100px;
   height: 80px;
+  padding: 0 100px;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
 `;
 
 const PrimaryButton = styled.button`
@@ -34,14 +38,18 @@ const PrimaryButton = styled.button`
   cursor: pointer;
 `;
 
-const SearchContainer = styled.input`
+const SearchContainer = styled.div`
+  width: 35%;
+`;
+
+const Search = styled.input`
   padding: 6px 10px;
   margin-top: 8px;
   margin-right: 16px;
   height: 30px;
   font-size: 17px;
-  border: 1px solid grey;
-  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
 `;
 const IconCounterWrapper = styled.div`
   position: relative;
@@ -90,9 +98,9 @@ export function Navbar() {
         <Title> FRESH-KART </Title>
       </Link>
 
-      <div>
-        <SearchContainer type="search" placeholder="Search" />
-      </div>
+      <SearchContainer>
+        <Search type="search" placeholder="Search" />
+      </SearchContainer>
 
       <IconContainer>
         <PrimaryButton

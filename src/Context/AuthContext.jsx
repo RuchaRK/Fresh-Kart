@@ -1,11 +1,11 @@
 import * as React from 'react';
 import propTypes from 'prop-types';
-import {clearLoginToken, setloginToken} from '../LoginLocalStorage';
+import {clearLoginToken, setloginToken, getLoginToken} from '../LoginLocalStorage';
 
 export const AuthContext = React.createContext();
 
 export function AuthContextProvider({children}) {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(Boolean(getLoginToken()));
 
   const login = (token) => {
     setIsLoggedIn(true);

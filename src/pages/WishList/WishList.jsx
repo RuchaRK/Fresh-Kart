@@ -1,12 +1,17 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {getLoginToken} from '../../LoginLocalStorage';
 import {CounterContext} from '../../Context/CounterContext';
 import {Container, ProductDetails, PrimaryButton} from './Wishlist.style';
 
 export function WishList() {
-  const [wishListData, setwishListData] = useState([]);
-  const {setWishListCounterValue, cartData, incrementQuantity, addItemToCart} =
-    useContext(CounterContext);
+  const {
+    wishListData,
+    setwishListData,
+    cartData,
+    incrementQuantity,
+    addItemToCart,
+    removeFromWishlist,
+  } = useContext(CounterContext);
 
   const fetchWishListData = async () => {
     try {
@@ -19,7 +24,6 @@ export function WishList() {
         },
       });
       const data = await response.json();
-
       setwishListData(data.wishlist);
     } catch (error) {
       console.error(error);
@@ -30,30 +34,10 @@ export function WishList() {
     fetchWishListData();
   }, []);
 
-  const removeFromWishlist = async (idValue) => {
-    try {
-      const response = await fetch(`/api/user/wishlist/${idValue}`, {
-        method: 'DELETE',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          authorization: getLoginToken(),
-        },
-      });
-
-      const data = await response.json();
-      setwishListData(data.wishlist);
-      setWishListCounterValue(data.wishlist.length);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const addProductToCart = (idValue, productToAdd) => {
     if (cartData.find((item) => item._id === idValue)) {
       incrementQuantity(idValue, 'increment');
     } else {
-      console.log('outside if');
       addItemToCart(productToAdd);
     }
   };

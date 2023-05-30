@@ -1,35 +1,11 @@
 import React, {useContext, useState} from 'react';
-import styled from '@emotion/styled';
 import {useLocation, useNavigate, Link} from 'react-router-dom';
 import {AuthContext} from '../Context/AuthContext';
 import {Button} from '../Components/Button';
 import {CounterContext} from '../Context/CounterContext';
 import {ToastContainer, toast} from 'react-toastify';
-
-const Container = styled.div`
-  margin: auto;
-  border: 3px solid purple;
-  display: flex;
-  width: 360px;
-  flex-direction: column;
-  align-items:"center":
-  height: 300px;
-  padding: 32px 60px;
-  gap: 16px;
-`;
-
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-`;
-
-export const Input = styled.input`
-  height: 30px;
-  padding: 4px;
-  width: 100%;
-`;
+import {Container, InputContainer, Input} from './Login.style';
+import {Loader} from '../Components/Loader';
 
 export function Login() {
   // eslint-disable-next-line no-undef
@@ -39,7 +15,7 @@ export function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {state} = useLocation();
-  const {setCartCounterValue, setWishListCounterValue} = useContext(CounterContext);
+  const {setCartData, setWishListCounterValue} = useContext(CounterContext);
 
   const handleLogin = (token) => {
     login(token);
@@ -67,11 +43,8 @@ export function Login() {
         setIsError(true);
         return;
       }
-
-      const cartCount = data.foundUser.cart.length;
       const wishListCount = data.foundUser.wishlist.length;
-
-      setCartCounterValue(cartCount);
+      setCartData(data.foundUser.cart);
       setWishListCounterValue(wishListCount);
 
       if (data.encodedToken) {
@@ -85,39 +58,47 @@ export function Login() {
   };
 
   return (
-    <Container>
-      <h1>Login</h1>
-      <InputContainer>
-        Email
-        <Input
-          type="email"
-          placeholder=" Enter email"
-          name="email"
-          onChange={(event) => {
-            setIsError(false);
-            setFormData({...formData, [event.target.name]: event.target.value});
-          }}
-        />
-      </InputContainer>
-      <InputContainer>
-        Password
-        <Input
-          type="password"
-          placeholder="Enter Password"
-          name="password"
-          onChange={(event) => {
-            setIsError(false);
-            setFormData({...formData, [event.target.name]: event.target.value});
-          }}
-        />
-      </InputContainer>
-      {isError && <p>Invalid Email or Password</p>}
-      <InputContainer>
-        <Button onClick={checkCredentails} disabled={isLoading}>
-          {isLoading ? 'Login...' : 'Login'}
-        </Button>
-        <Link to="/signin">New to Fresh-KART? Create an account.</Link>
-      </InputContainer>
-    </Container>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Container>
+          <h1>Login</h1>
+          <InputContainer>
+            Email
+            <Input
+              type="email"
+              placeholder=" Enter email"
+              name="email"
+              onChange={(event) => {
+                setIsError(false);
+                setFormData({...formData, [event.target.name]: event.target.value});
+              }}
+            />
+          </InputContainer>
+          <InputContainer>
+            Password
+            <Input
+              type="password"
+              placeholder="Enter Password"
+              name="password"
+              onChange={(event) => {
+                setIsError(false);
+                setFormData({...formData, [event.target.name]: event.target.value});
+              }}
+            />
+          </InputContainer>
+          {isError && <p>Invalid Email or Password</p>}
+          <InputContainer>
+            <Button onClick={checkCredentails} disabled={isLoading}>
+              {isLoading ? 'Login...' : 'Login'}
+            </Button>
+            <Link to="/signin" style={{textDecoration: 'none'}}>
+              New to Fresh-KART? Create an account.
+            </Link>
+          </InputContainer>
+        </Container>
+      )}
+    </>
   );
 }

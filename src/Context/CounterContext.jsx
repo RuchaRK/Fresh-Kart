@@ -1,22 +1,15 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {ToastContainer, toast} from 'react-toastify';
+import {toast} from 'react-toastify';
+import PropTypes from 'prop-types';
 import {getLoginToken} from '../LoginLocalStorage';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const CounterContext = React.createContext();
 
 export function CounterContextProvider({children}) {
-  const [cartCounter, setCartCounter] = React.useState(0);
-  const [wishlistCounter, setWishListCounter] = React.useState(0);
+  const [wishListData, setwishListData] = useState([]);
   const [cartData, setCartData] = useState([]);
-
-  const setCartCounterValue = (countValue) => {
-    setCartCounter(countValue);
-  };
-  const setWishListCounterValue = (countValue) => {
-    setWishListCounter(countValue);
-  };
 
   const incrementQuantity = async (idValue, incrementType) => {
     try {
@@ -33,7 +26,6 @@ export function CounterContextProvider({children}) {
           authorization: getLoginToken(),
         },
       });
-
       const data = await response.json();
       setCartData(data.cart);
     } catch (error) {
@@ -57,11 +49,13 @@ export function CounterContextProvider({children}) {
         },
       });
       const data = await response.json();
-      if (data.cart.length > 0) {
-        setCartCounterValue(data.cart.length);
+      if (data.cart) {
+        setCartData(data.cart);
+        toast.success('Product Added to cart');
       }
     } catch (error) {
       console.error(error);
+      toast.error(`${error} occured`);
     }
   };
 
@@ -82,9 +76,30 @@ export function CounterContextProvider({children}) {
       });
       const data = await response.json();
 
-      if (data.wishlist.length > 0) {
-        setWishListCounterValue(data.wishlist.length);
+      if (data.wishlist) {
+        setwishListData(data.wishlist);
+        toast.success('Product Added to WishList');
       }
+    } catch (error) {
+      console.error(error);
+      toast.error(`${error} occured`);
+    }
+  };
+
+  const removeFromWishlist = async (idValue) => {
+    try {
+      const response = await fetch(`/api/user/wishlist/${idValue}`, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          authorization: getLoginToken(),
+        },
+      });
+
+      const data = await response.json();
+      setwishListData(data.wishlist);
+      toast.error('Product Removed from WishList');
     } catch (error) {
       console.error(error);
     }
@@ -95,15 +110,16 @@ export function CounterContextProvider({children}) {
       <CounterContext.Provider
         // eslint-disable-next-line react/jsx-no-constructed-context-values
         value={{
-          cartCounter,
-          wishlistCounter,
+          cartCounter: cartData.length,
+          wishlistCounter: wishListData.length,
           cartData,
           setCartData,
+          wishListData,
+          setwishListData,
           incrementQuantity,
-          setCartCounterValue,
-          setWishListCounterValue,
           addItemToCart,
           addItemToWishlist,
+          removeFromWishlist,
         }}
       >
         {children}
@@ -111,3 +127,7 @@ export function CounterContextProvider({children}) {
     </div>
   );
 }
+
+CounterContextProvider.propTypes = {
+  children: PropTypes.element.isRequired,
+};
