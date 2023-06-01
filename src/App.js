@@ -12,8 +12,8 @@ import {Login} from './pages/Login';
 import {RequiresAuth} from './Components/RequiresAuth';
 import {SignIn} from './pages/SignIn';
 import {ProductDetail} from './pages/Product/ProductDetail';
-
 import 'react-toastify/dist/ReactToastify.css';
+import {Address} from './pages/Address';
 
 function App() {
   return (
@@ -21,11 +21,11 @@ function App() {
       <PageWrapper>
         <Routes>
           <Route path={routeName.HOME} element={<Home />} />
-          <Route path="/mockman" element={<Mockman />} />
+          <Route path={routeName.Mockman} element={<Mockman />} />
           <Route path={routeName.PRODUCTS} element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path={routeName.PRODUCT_DETAIL.template} element={<ProductDetail />} />
+          <Route path={routeName.LOGIN} element={<Login />} />
+          <Route path={routeName.SIGNUP} element={<SignIn />} />
 
           <Route
             path={routeName.CART}
@@ -36,10 +36,19 @@ function App() {
             }
           />
           <Route
-            path="/wishlist"
+            path={routeName.WISHLIST}
             element={
               <RequiresAuth>
                 <WishList />
+              </RequiresAuth>
+            }
+          />
+
+          <Route
+            path={routeName.ADDRESS}
+            element={
+              <RequiresAuth>
+                <Address />
               </RequiresAuth>
             }
           />

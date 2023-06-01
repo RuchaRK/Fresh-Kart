@@ -271,13 +271,19 @@ export const Products = () => {
             <>
               <CardContainer>
                 <div style={{margin: '15px 0px'}}>
-                  <Link to={`/products/${goods._id}`} style={{textDecoration: 'none'}}>
+                  <Link
+                    to={routeName.PRODUCT_DETAIL.create(goods._id)}
+                    style={{textDecoration: 'none'}}
+                  >
                     <img src={goods.image} height="200px" width="200px" alt={goods.name} />
                   </Link>
                 </div>
 
                 <Data>
-                  <Link to={`/products/${goods._id}`} style={{textDecoration: 'none'}}>
+                  <Link
+                    to={routeName.PRODUCT_DETAIL.create(goods._id)}
+                    style={{textDecoration: 'none'}}
+                  >
                     <h3 style={{margin: '10px 5px'}}>{goods.name} </h3>
                   </Link>
 

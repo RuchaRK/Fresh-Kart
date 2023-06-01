@@ -4,11 +4,11 @@
 import React, {useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import {BsFillBagHeartFill} from 'react-icons/bs';
+import {AiOutlinePlusSquare, AiOutlineMinusSquare} from 'react-icons/ai';
 import {getLoginToken} from '../../LoginLocalStorage';
 import {CounterContext} from '../../Context/CounterContext';
 import {
-  CheckoutContainer,
-  Container,
+  CartContainer,
   ProductContainer,
   ProductDetails,
   SecondaryButton,
@@ -16,15 +16,11 @@ import {
   ActualPrice,
   DiscountPrice,
   PrimaryButton,
-  PriceContainer,
-  TotalPrice,
-  PriceDetails,
-  Discount,
-  Delivary,
-  AmtToPay,
-  CheckoutButton,
+  TitleContainer,
 } from './Cart.style';
 import {routeName} from '../../App.routes';
+import {PriceDetail} from '../../Components/PriceDetail';
+import {IconButton} from '../../Components/IconButton';
 
 export function Cart() {
   const {cartData, setCartData, incrementQuantity, addItemToWishlist, cartCounter} =
@@ -70,25 +66,13 @@ export function Cart() {
     }
   };
 
-  const totalActualPrice = cartData.reduce(
-    (a, c) => ({
-      ...a,
-      totalPrice: a.totalPrice + c.price,
-      discountPrice: a.discountPrice + Math.round((c.price - (c.price * c.discount) / 100) * c.qty),
-    }),
-
-    {totalPrice: 0, discountPrice: 0},
-  );
-
-  const TotalDiscount = totalActualPrice.totalPrice - totalActualPrice.discountPrice;
-
   return (
     <>
-      <div>
-        <h2> My Cart ({cartCounter}) </h2>
-      </div>
+      <TitleContainer>
+        <h2> My Cart {cartCounter > 0 && `(${cartCounter})`}</h2>
+      </TitleContainer>
       {cartData?.length > 0 ? (
-        <Container>
+        <CartContainer>
           <ProductContainer>
             {cartData.map((productDetails) => (
               <ProductDetails>
@@ -111,7 +95,7 @@ export function Cart() {
                   </DiscountPrice>
 
                   <ActualPrice>
-                    <span>&#8377;</span> : {productDetails.price}/-
+                    <span>&#8377;</span> : {productDetails.price * productDetails.qty}/-
                   </ActualPrice>
 
                   <p style={{margin: '10px 0px', fontWeight: 'bold'}}>
@@ -119,19 +103,20 @@ export function Cart() {
                   </p>
 
                   {/* // eslint-disable-next-line no-underscore-dangle */}
-                  <div style={{margin: '10px 0px'}}>
+                  <div
+                    style={{margin: '10px 0px', display: 'flex', gap: '4px', alignItems: 'center'}}
+                  >
                     Quantity :
-                    <SecondaryButton
+                    <IconButton
+                      disabled={productDetails.qty <= 1}
                       onClick={() => incrementQuantity(productDetails._id, 'decrement')}
                     >
-                      ➖
-                    </SecondaryButton>
+                      <AiOutlineMinusSquare size={24} />
+                    </IconButton>
                     {productDetails.qty}
-                    <SecondaryButton
-                      onClick={() => incrementQuantity(productDetails._id, 'increment')}
-                    >
-                      ➕
-                    </SecondaryButton>
+                    <IconButton onClick={() => incrementQuantity(productDetails._id, 'increment')}>
+                      <AiOutlinePlusSquare size={24} />
+                    </IconButton>
                   </div>
 
                   <div>
@@ -152,61 +137,27 @@ export function Cart() {
               </ProductDetails>
             ))}
           </ProductContainer>
-
-          <CheckoutContainer>
-            <PriceContainer>
-              <PriceDetails>
-                <h2>Price Details </h2>
-              </PriceDetails>
-
-              <TotalPrice>
-                <h4>Price({cartCounter} items)</h4>
-                <h4>
-                  <span>&#8377;</span> {totalActualPrice.totalPrice}
-                </h4>
-              </TotalPrice>
-
-              <Discount>
-                <h4>Discount</h4>
-                <h4>
-                  - <span>&#8377;</span> {TotalDiscount}
-                </h4>
-              </Discount>
-
-              <Delivary>
-                <h4>Delivary Charges</h4>
-                <h4>FREE</h4>
-              </Delivary>
-
-              <AmtToPay>
-                <h4>TOTAL AMOUNT </h4>
-                <h4>
-                  <span>&#8377;</span> {totalActualPrice.totalPrice - TotalDiscount}
-                </h4>
-              </AmtToPay>
-
-              <h4>
-                You will save <span>&#8377;</span>
-                {TotalDiscount} on this order.
-              </h4>
-              <div>
-                <CheckoutButton>Checkout</CheckoutButton>
-              </div>
-            </PriceContainer>
-          </CheckoutContainer>
-        </Container>
+          <PriceDetail />
+        </CartContainer>
       ) : (
         <div>
           <h3 style={{margin: '10px 15px'}}>Hey, It feels so light!</h3>
-          <p style={{margin: '10px 15px'}}>
+          <p
+            style={{
+              margin: '10px 15px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '4px',
+            }}
+          >
             <BsFillBagHeartFill size={25} />
             There is nothing in your bag. Lets Add some items in your bag.
           </p>
-          <SecondaryButton>
-            <Link to={routeName.HOME} style={{textDecoration: 'none'}}>
-              Shop Now
-            </Link>
-          </SecondaryButton>
+
+          <Link to={routeName.HOME} style={{textDecoration: 'none'}}>
+            <SecondaryButton>Shop Now</SecondaryButton>
+          </Link>
         </div>
       )}
     </>

@@ -78,6 +78,7 @@ export function SignIn() {
       setIsLoading(false);
     }
   };
+
   return (
     <form>
       <Container>
@@ -134,7 +135,7 @@ export function SignIn() {
           Confirm Password
           <Input
             type="password"
-            placeholder=" Confirm Password"
+            placeholder="Confirm Password"
             name="confirmPassword"
             required
             onChange={(event) =>

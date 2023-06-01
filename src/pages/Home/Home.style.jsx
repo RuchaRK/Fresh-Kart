@@ -5,6 +5,7 @@ export const Container = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 100px;
+  margin: 32px;
 `;
 
 export const CategoryBox = styled.div`

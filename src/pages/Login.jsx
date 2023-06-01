@@ -15,7 +15,7 @@ export function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {state} = useLocation();
-  const {setCartData, setWishListCounterValue} = useContext(CounterContext);
+  const {setCartData, setwishListData} = useContext(CounterContext);
 
   const handleLogin = (token) => {
     login(token);
@@ -43,9 +43,9 @@ export function Login() {
         setIsError(true);
         return;
       }
-      const wishListCount = data.foundUser.wishlist.length;
+
       setCartData(data.foundUser.cart);
-      setWishListCounterValue(wishListCount);
+      setwishListData(data.foundUser.wishlist);
 
       if (data.encodedToken) {
         handleLogin(data.encodedToken);

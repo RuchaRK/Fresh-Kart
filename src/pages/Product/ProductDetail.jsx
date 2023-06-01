@@ -74,13 +74,11 @@ export function ProductDetail() {
         </InfoStyle>
 
         <SecondaryButton onClick={() => addItemToCart(productToShow)}>
-          <AiOutlineShoppingCart />
-          Add To Cart
+          Add To Cart <AiOutlineShoppingCart />
         </SecondaryButton>
 
         <SecondaryButton onClick={() => addItemToWishlist(productToShow)}>
-          <AiFillHeart />
-          Add to WishList
+          Add to WishList <AiFillHeart />
         </SecondaryButton>
       </ProductData>
     </ShowProduct>

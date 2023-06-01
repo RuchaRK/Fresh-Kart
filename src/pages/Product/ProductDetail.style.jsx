@@ -84,11 +84,13 @@ export const SecondaryButton = styled.button`
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 14px;
   margin: 10px 2px;
   cursor: pointer;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `;
 
 export const InfoStyle = styled.p`

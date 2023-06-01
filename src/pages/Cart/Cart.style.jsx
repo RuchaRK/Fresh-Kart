@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
+export const CartContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -15,6 +15,7 @@ export const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 `;
 
 export const CheckoutContainer = styled.div`
@@ -27,7 +28,6 @@ export const CheckoutContainer = styled.div`
 export const ProductDetails = styled.div`
   display: flex;
   border-radius: 20px;
-  margin: 15px 10px;
   box-shadow: rgba(90, 90, 90, 0.35) 0px 5px 15px;
   width: 90%;
   padding: 10px 10px;
@@ -39,6 +39,9 @@ export const Data = styled.div`
   text-align: left;
 `;
 
+export const TitleContainer = styled.div`
+  margin: 20px;
+`;
 export const SecondaryButton = styled.button`
   border-radius: 10px;
   border: none;
@@ -87,13 +90,12 @@ export const DiscountPrice = styled.p`
 `;
 
 export const PriceContainer = styled.div`
-  margin: 15px 10px;
   box-shadow: rgba(90, 90, 90, 0.35) 0px 5px 15px;
   width: 75%;
+  border-radius: 15px;
 `;
 
 export const PriceDetails = styled.div`
-  margin: 15px 10px;
   border-bottom: 1px solid #d3d3d3;
   padding: 10px 10px;
 `;
