@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react';
 import {useLocation, useNavigate, Link} from 'react-router-dom';
-import {AuthContext} from '../Context/AuthContext';
-import {Button} from '../Components/Button';
-import {CounterContext} from '../Context/CounterContext';
+import {AuthContext} from '../../Context/AuthContext';
+import {Button} from '../../Components/Button';
+import {CounterContext} from '../../Context/CounterContext';
 import {ToastContainer, toast} from 'react-toastify';
 import {Container, InputContainer, Input} from './Login.style';
-import {Loader} from '../Components/Loader';
+import {Loader} from '../../Components/Loader';
 
 export function Login() {
   // eslint-disable-next-line no-undef

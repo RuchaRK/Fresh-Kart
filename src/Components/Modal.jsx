@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import {React} from 'react';
-import {createPortal} from 'react-dom';
+import ReactDom from 'react-dom';
 import {IoMdClose} from 'react-icons/io';
 
 const ModalContentContainer = styled.div`
   background-color: white;
-  margin: 200px auto;
   width: 500px;
   padding: 1px;
   min-height: 200px;
@@ -19,7 +18,10 @@ const ModalWrapper = styled.div`
   position: absolute;
   height: 100vh;
   width: 100vw;
+  display: flex;
   overflow: hidden;
+  align-items: center;
+  justify-content: center;
 `;
 
 const CloseButton = styled.button`
@@ -56,9 +58,9 @@ export function Modal({open, children, closeModal}) {
   return (
     <div>
       {open &&
-        createPortal(
+        ReactDom.createPortal(
           <ModalContent closeModal={closeModal}>{children}</ModalContent>,
-          document.getElementById('portal-root'),
+          document.body,
         )}
     </div>
   );

@@ -7,6 +7,7 @@ import {AiOutlineHeart, AiOutlineShoppingCart} from 'react-icons/ai';
 import {routeName} from '../App.routes';
 import {AuthContext} from '../Context/AuthContext';
 import {CounterContext} from '../Context/CounterContext';
+import {SearchContext} from '../Context/SearchContext';
 
 const Title = styled.h1`
   color: green;
@@ -91,6 +92,13 @@ export function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const {cartCounter, wishlistCounter} = useContext(CounterContext);
+  const {setSearch} = useContext(SearchContext);
+
+  const handleChange = (event) => {
+    setSearch(event.target.value);
+
+    navigate('/products');
+  };
 
   return (
     <Header>
@@ -99,7 +107,7 @@ export function Navbar() {
       </Link>
 
       <SearchContainer>
-        <Search type="search" placeholder="Search" />
+        <Search type="search" placeholder="Search" onChange={(event) => handleChange(event)} />
       </SearchContainer>
 
       <IconContainer>

@@ -23,6 +23,7 @@ import {
 import {CounterContext} from '../../Context/CounterContext';
 import {routeName} from '../../App.routes';
 import {ProductContext} from '../../Context/ProductContext';
+import {SearchContext} from '../../Context/SearchContext';
 
 const MIN_RANGE_VALUE = 15;
 
@@ -34,6 +35,8 @@ export const Products = () => {
     rating: 0,
     sort: '',
   };
+
+  const {search} = useContext(SearchContext);
   const {productsData, setProductsData} = useContext(ProductContext);
   const [filterValue, setFilterValue] = useState(initialState);
   const {addItemToCart, addItemToWishlist, cartData, wishListData, removeFromWishlist} =
@@ -72,7 +75,8 @@ export const Products = () => {
     .filter((item) =>
       filterValue.category.length > 0 ? filterValue.category.includes(item.categoryName) : true,
     )
-    .filter((item) => (filterValue.rating > 0 ? item.rating >= filterValue.rating : true));
+    .filter((item) => (filterValue.rating > 0 ? item.rating >= filterValue.rating : true))
+    .filter((item) => item.name.toLowerCase().includes(search));
 
   if (filterValue.sort === 'asc') {
     filteredData.sort((a, b) => a.price - b.price);
@@ -260,13 +264,6 @@ export const Products = () => {
 
       <Content>
         {filteredData.map((goods) => {
-          console.log(
-            cartData.find((item) => item._id === goods._id),
-            goods,
-            cartData,
-          );
-
-          console.log(productsData);
           return (
             <>
               <CardContainer>

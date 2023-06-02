@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react';
 import styled from '@emotion/styled';
 import {useNavigate} from 'react-router-dom';
-import {AuthContext} from '../Context/AuthContext';
-import {Button} from '../Components/Button';
+import {AuthContext} from '../../Context/AuthContext';
+import {Button} from '../../Components/Button';
 
-const Container = styled.div`
+export const Container = styled.div`
   margin: auto;
   border: 3px solid purple;
   display: flex;

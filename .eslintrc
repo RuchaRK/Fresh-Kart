@@ -11,7 +11,8 @@
     "react/react-in-jsx-scope": ["off"],
     "import/no-extraneous-dependencies": ["off"],
     "import/prefer-default-export": ["off"],
-    "react/button-has-type": ["off"]
+    "react/button-has-type": ["off"],
+    "no-underscore-dangle": ["off"]
   },
   "root": true,
   "ignorePatterns": ["src/backend/", "src/server.js"],

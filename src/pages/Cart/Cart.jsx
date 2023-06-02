@@ -45,7 +45,6 @@ export function Cart() {
 
   useEffect(() => {
     fetchCartData();
-    console.log(cartData);
   }, []);
 
   const removeFromCart = async (idValue) => {

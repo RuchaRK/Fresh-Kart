@@ -7,6 +7,7 @@ import App from './App';
 import {AuthContextProvider} from './Context/AuthContext';
 import {CounterContextProvider} from './Context/CounterContext';
 import {ProductContextProvider} from './Context/ProductContext';
+import {SearchContextProvider} from './Context/SearchContext';
 
 // Call make Server
 makeServer();
@@ -17,7 +18,9 @@ ReactDOM.render(
       <AuthContextProvider>
         <CounterContextProvider>
           <ProductContextProvider>
-            <App />
+            <SearchContextProvider>
+              <App />
+            </SearchContextProvider>
           </ProductContextProvider>
         </CounterContextProvider>
       </AuthContextProvider>

@@ -17,3 +17,19 @@ export const Title = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+export const Input = styled.input`
+  padding: 0.3rem 0px;
+  font-size: 1rem;
+  border-radius: 7px;
+
+  &:hover {
+    border: 1px solid #008cba;
+  }
+`;

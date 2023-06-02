@@ -113,7 +113,7 @@ export function Footer() {
               <li>Resources</li>
               <li>
                 <Link to={routeName.LOGIN} style={{textDecoration: 'none', color: 'white'}}>
-                  Loginin
+                  Login
                 </Link>
               </li>
               <li>
