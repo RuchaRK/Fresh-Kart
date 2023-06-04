@@ -1,7 +1,12 @@
 import React, {useEffect, useContext} from 'react';
+import {AiOutlineShoppingCart} from 'react-icons/ai';
+import {Link} from 'react-router-dom';
 import {getLoginToken} from '../../LoginLocalStorage';
 import {CounterContext} from '../../Context/CounterContext';
-import {Container, ProductDetails, PrimaryButton} from './Wishlist.style';
+import {Container} from './Wishlist.style';
+import {Button} from '../../Components/Button';
+import {ProductCard} from '../../Components/ProductCard';
+import {routeName} from '../../App.routes';
 
 export function WishList() {
   const {
@@ -45,36 +50,46 @@ export function WishList() {
   return (
     <div>
       <h1>My WishList</h1>
-      <Container>
-        {wishListData &&
-          wishListData.map((productDetails) => (
-            <ProductDetails>
-              <img
-                src={productDetails.image}
-                alt={productDetails.name}
-                height="250px"
-                width="250px"
-                style={{borderRadius: 'inherit'}}
-              />
 
-              <h3 style={{margin: '5px 0px'}}>{productDetails.name}</h3>
-              <p style={{margin: '5px 0px'}}>
-                <span>&#8377;</span>
-                {Math.round(productDetails.price - (productDetails.price * 10) / 100)}
-              </p>
-
-              <PrimaryButton
-                onClick={() => {
-                  addProductToCart(productDetails._id, productDetails);
-                  removeFromWishlist(productDetails._id);
-                }}
-              >
-                Move to Cart
-              </PrimaryButton>
-              {/* // eslint-disable-next-line no-underscore-dangle */}
-            </ProductDetails>
+      {wishListData?.length > 0 ? (
+        <Container>
+          {wishListData.map((productDetails) => (
+            <ProductCard
+              button={
+                <Button
+                  varient="outlined"
+                  fullWidth
+                  icon={<AiOutlineShoppingCart size={16} />}
+                  onClick={() => {
+                    addProductToCart(productDetails._id, productDetails);
+                    removeFromWishlist(productDetails._id);
+                  }}
+                >
+                  Move to Cart
+                </Button>
+              }
+              product={productDetails}
+            />
           ))}
-      </Container>
+        </Container>
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            gap: '8px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            marginTop: '20px',
+          }}
+        >
+          <p>Discover a garden of fresh delights at our Fresh-Kart</p>
+
+          <Link to={routeName.HOME} style={{textDecoration: 'none'}}>
+            <Button varient="contained">Shop Now</Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

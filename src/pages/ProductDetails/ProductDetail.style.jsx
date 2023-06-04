@@ -30,6 +30,7 @@ export const ProductData = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 10px 20px;
+  gap: 8px;
 `;
 
 export const PageTitle = styled.div`
@@ -51,7 +52,6 @@ export const DisplayDiscount = styled.span`
   font-weight: bold;
   margin: 4px 2px;
   animation: blinking 1s infinite;
-
   @keyframes blinking {
     0% {
       color: #06c3d1;
@@ -66,7 +66,6 @@ export const ActualPrice = styled.p`
   color: #a9a9a9;
   font-size: 16px;
   text-decoration: line-through;
-  margin: 10px 0px;
 `;
 
 export const DiscountPrice = styled.p`
@@ -76,33 +75,14 @@ export const DiscountPrice = styled.p`
   margin-bottom: 20px;
 `;
 
-export const SecondaryButton = styled.button`
-  border-radius: 25px;
-  background-color: #008cba;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 14px;
-  margin: 10px 2px;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-`;
-
 export const InfoStyle = styled.p`
   font-size: 14px;
   color: black;
-  margin-bottom: 10px;
 `;
 
 export const Info = styled.div`
   color: black;
   font-weight: bold;
   font-size: 17px;
-  margin-bottom: 10px;
   display: inline-block;
 `;

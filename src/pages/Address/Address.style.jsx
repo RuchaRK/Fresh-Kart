@@ -11,6 +11,8 @@ export const AddressContainer = styled.div`
   padding: 15px;
   box-shadow: rgba(90, 90, 90, 0.35) 0px 5px 15px;
   border-radius: 15px;
+  background-color: white;
+  text-align: left;
 `;
 
 export const Title = styled.div`

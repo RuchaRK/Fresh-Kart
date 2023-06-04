@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useState} from 'react';
 import styled from '@emotion/styled';
-import {InputContainer, Input} from '../Login/SignIn';
+import {InputContainer, Input} from '../../Components/Input';
 import {Button} from '../../Components/Button';
 
 const Container = styled.div`
@@ -84,7 +84,7 @@ export function AddressForm({onSave, closeModal, initialValues}) {
           <Input
             type="tel"
             placeholder="Enter Mobile Number"
-            name="phone"
+            name="mobileNo"
             value={addressObject.mobileNo}
             pattern="[7-9]{2}[0-9]{8}"
             required
@@ -93,15 +93,10 @@ export function AddressForm({onSave, closeModal, initialValues}) {
         </InputContainer>
 
         <div style={{display: 'flex', gap: '10px', justifyContent: 'right'}}>
-          <Button
-            type="button"
-            style={{width: 'fit-content', padding: '5px 5px'}}
-            onClick={closeModal}
-          >
+          <Button type="button" onClick={closeModal} varient="outlined">
             Cancel
           </Button>
           <Button
-            style={{width: 'fit-content', padding: '5px 5px'}}
             onClick={(event) => {
               event.preventDefault();
               onSave(addressObject);

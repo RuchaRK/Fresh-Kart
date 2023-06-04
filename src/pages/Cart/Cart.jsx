@@ -11,16 +11,16 @@ import {
   CartContainer,
   ProductContainer,
   ProductDetails,
-  SecondaryButton,
   Data,
   ActualPrice,
   DiscountPrice,
-  PrimaryButton,
   TitleContainer,
+  ButtonWrapper,
 } from './Cart.style';
 import {routeName} from '../../App.routes';
-import {PriceDetail} from '../../Components/PriceDetail';
+import {OrderDetails} from '../../Components/OrderDetails';
 import {IconButton} from '../../Components/IconButton';
+import {Button} from '../../Components/Button';
 
 export function Cart() {
   const {cartData, setCartData, incrementQuantity, addItemToWishlist, cartCounter} =
@@ -118,36 +118,42 @@ export function Cart() {
                     </IconButton>
                   </div>
 
-                  <div>
-                    <PrimaryButton onClick={() => removeFromCart(productDetails._id)}>
+                  <ButtonWrapper>
+                    <Button varient="outlined" onClick={() => removeFromCart(productDetails._id)}>
                       Remove From Cart
-                    </PrimaryButton>
+                    </Button>
 
-                    <PrimaryButton
+                    <Button
                       onClick={() => {
                         addItemToWishlist(productDetails);
                         removeFromCart(productDetails._id);
                       }}
                     >
                       Move to WishList
-                    </PrimaryButton>
-                  </div>
+                    </Button>
+                  </ButtonWrapper>
                 </Data>
               </ProductDetails>
             ))}
           </ProductContainer>
-          <PriceDetail />
+          <OrderDetails />
         </CartContainer>
       ) : (
-        <div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '4px',
+            flexDirection: 'column',
+          }}
+        >
           <h3 style={{margin: '10px 15px'}}>Hey, It feels so light!</h3>
           <p
             style={{
               margin: '10px 15px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              gap: '4px',
             }}
           >
             <BsFillBagHeartFill size={25} />
@@ -155,7 +161,7 @@ export function Cart() {
           </p>
 
           <Link to={routeName.HOME} style={{textDecoration: 'none'}}>
-            <SecondaryButton>Shop Now</SecondaryButton>
+            <Button varient="contained">Shop Now</Button>
           </Link>
         </div>
       )}

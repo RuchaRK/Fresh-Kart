@@ -4,13 +4,17 @@ import styled from '@emotion/styled';
 import React, {useContext} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {AiOutlineHeart, AiOutlineShoppingCart} from 'react-icons/ai';
+import {FiLogIn, FiLogOut} from 'react-icons/fi';
 import {routeName} from '../App.routes';
 import {AuthContext} from '../Context/AuthContext';
 import {CounterContext} from '../Context/CounterContext';
 import {SearchContext} from '../Context/SearchContext';
+import {IconButtonWithCount} from './IconButtonWithCount';
+import {ColorPalette} from '../Color';
+import {IconButton} from './IconButton';
 
 const Title = styled.h1`
-  color: green;
+  color: ${ColorPalette.secondary.main};
 `;
 const Header = styled.div`
   display: flex;
@@ -25,66 +29,25 @@ const Header = styled.div`
   z-index: 9999;
 `;
 
-const PrimaryButton = styled.button`
-  border-radius: 5px;
-  background-color: white; /* Green */
-  border: 1px solid #008cba;
-  color: #008cba;
-  padding: 10px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 2px;
-  cursor: pointer;
-`;
-
-const SearchContainer = styled.div`
-  width: 35%;
-`;
-
 const Search = styled.input`
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  height: 30px;
-  font-size: 17px;
-  width: 100%;
-  border-radius: 5px;
-`;
-const IconCounterWrapper = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-const IconCounter = styled.span`
-  position: absolute;
-  background: black;
-  padding: 1px 2px;
-  color: white;
-  width: 10px;
-  border-radius: 25%;
-  top: -5px;
-  right: -5px;
-  font-size: 12px;
-`;
-const IconButtonBlack = styled.span`
-  border-radius: 50%;
-  padding: 2px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:hover {
-    /* color hex code - #000000 opacity - 20 */
-    background: #00000020;
+  padding: 10px 20px;
+  width: 35%;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 2px solid ${ColorPalette.lightBorder};
+  &:hover,
+  &:focus,
+  &:focus-within {
+    outline: none !important;
+    border: 2px solid ${ColorPalette.primary.main} !important;
   }
 `;
 
 const IconContainer = styled.div`
   display: flex;
   gap: 15px;
-  align-items: self-end;
+  align-items: center;
 `;
 
 export function Navbar() {
@@ -106,12 +69,26 @@ export function Navbar() {
         <Title> FRESH-KART </Title>
       </Link>
 
-      <SearchContainer>
-        <Search type="search" placeholder="Search" onChange={(event) => handleChange(event)} />
-      </SearchContainer>
+      <Search
+        type="text"
+        placeholder="Search for product"
+        onChange={(event) => handleChange(event)}
+      />
 
       <IconContainer>
-        <PrimaryButton
+        <Link to="/wishlist" style={{textDecoration: 'none'}}>
+          <IconButtonWithCount count={wishlistCounter}>
+            <AiOutlineHeart size={32} />
+          </IconButtonWithCount>
+        </Link>
+
+        <Link to="/cart" style={{textDecoration: 'none'}}>
+          <IconButtonWithCount count={cartCounter}>
+            <AiOutlineShoppingCart size={32} />
+          </IconButtonWithCount>
+        </Link>
+
+        <IconButton
           onClick={() => {
             if (isLoggedIn) {
               logout();
@@ -120,26 +97,8 @@ export function Navbar() {
             }
           }}
         >
-          {isLoggedIn ? 'Logout' : 'Login'}
-        </PrimaryButton>
-
-        <IconCounterWrapper>
-          <IconCounter>{wishlistCounter}</IconCounter>
-          <IconButtonBlack>
-            <Link to="/wishlist" style={{textDecoration: 'none'}}>
-              <AiOutlineHeart size={30} />
-            </Link>
-          </IconButtonBlack>
-        </IconCounterWrapper>
-
-        <IconCounterWrapper>
-          <IconCounter> {cartCounter} </IconCounter>
-          <IconButtonBlack>
-            <Link to="/cart" style={{textDecoration: 'none'}}>
-              <AiOutlineShoppingCart size={30} />
-            </Link>
-          </IconButtonBlack>
-        </IconCounterWrapper>
+          {isLoggedIn ? <FiLogOut size={30} /> : <FiLogIn size={30} />}
+        </IconButton>
       </IconContainer>
     </Header>
   );

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import {ColorPalette} from '../../Color';
 
 export const Container = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ export const Container = styled.div`
   height: 100%;
 `;
 
-export const Filter = styled.div`
+export const FilterContainer = styled.div`
   flex: 0.2;
   height: 100%;
   display: flex;
@@ -21,6 +22,7 @@ export const Filter = styled.div`
   border-radius: 15px;
   position: sticky;
   top: 112px;
+  width: 100%;
 `;
 
 export const FilterOptions = styled.div`
@@ -28,6 +30,12 @@ export const FilterOptions = styled.div`
   gap: 8px;
   text-align: left;
   flex-direction: column;
+  width: 100%;
+`;
+
+export const HorizantalDivider = styled.div`
+  border-bottom: 2px solid ${ColorPalette.primary.dark};
+  width: 100%;
 `;
 
 export const Content = styled.div`
@@ -43,6 +51,8 @@ export const Content = styled.div`
 
 export const CardContainer = styled.div`
   position: relative;
+  padding: 16px;
+  gap: 16px;
   height: 450px;
   width: 300px;
   curser: pointer;
@@ -58,15 +68,17 @@ export const CardContainer = styled.div`
 
 export const Data = styled.div`
   text-align: initial;
-  padding: 5px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 `;
 
 export const PageTitle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 70%;
-  align-items: baseline;
+  align-items: center;
+  width: 100%;
 `;
 
 export const SliderContainer = styled.input`
@@ -75,51 +87,10 @@ export const SliderContainer = styled.input`
   height: 60px;
 `;
 
-export const SecondaryButton = styled.button`
-  border-radius: 10px;
-  background-color: #008cba;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 4px 2px;
-  cursor: pointer;
-`;
-
 export const IconContainer = styled.span`
   position: absolute;
   top: 5px;
   right: 5px;
-`;
-
-export const IconButtonRed = styled.span`
-  border-radius: 50%;
-  padding: 2px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    /* color hex code - #f90909 opacity - 20 */
-    background: #f9090920;
-  }
-`;
-
-export const ClearButton = styled.button`
-  background-color: #fafafa;
-  border: none;
-  color: #008cba;
-  padding: 5px 5px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 2px;
-  cursor: pointer;
 `;
 
 export const ActualPrice = styled.p`
@@ -145,5 +116,17 @@ export const PriceContainer = styled.div`
   justify-content: flex-start;
   gap: 10px;
   align-items: baseline;
-  margin: 10px 5px;
+  margin: 10px 0;
+`;
+
+export const RangeMarker = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+`;
+
+export const InputLabelContainer = styled.div`
+  display: flex;
+  gap: 4px;
+  align-items: center;
 `;

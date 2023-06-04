@@ -10,10 +10,11 @@ import {Cart} from './pages/Cart/Cart';
 import {WishList} from './pages/WishList/WishList';
 import {Login} from './pages/Login/Login';
 import {RequiresAuth} from './Components/RequiresAuth';
-import {SignIn} from './pages/Login/SignIn';
-import {ProductDetail} from './pages/Product/ProductDetail';
+import {SignIn} from './pages/SignIn/SignIn';
+import {ProductDetail} from './pages/ProductDetails/ProductDetail';
 import 'react-toastify/dist/ReactToastify.css';
 import {Address} from './pages/Address/Address';
+import {NotFound} from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
               </RequiresAuth>
             }
           />
+          <Route path="*" Component={NotFound} />
         </Routes>
       </PageWrapper>
       <ToastContainer />

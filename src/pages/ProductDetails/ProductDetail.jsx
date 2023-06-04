@@ -8,7 +8,6 @@ import {
   ProductData,
   DiscountPrice,
   ActualPrice,
-  SecondaryButton,
   InfoStyle,
   Info,
   Bandge,
@@ -16,6 +15,7 @@ import {
   DisplayDiscount,
 } from './ProductDetail.style';
 import {CounterContext} from '../../Context/CounterContext';
+import {Button} from '../../Components/Button';
 
 export function ProductDetail() {
   const {id} = useParams();
@@ -73,13 +73,14 @@ export function ProductDetail() {
           <Info> Package-With:</Info> {productToShow.packageWith}
         </InfoStyle>
 
-        <SecondaryButton onClick={() => addItemToCart(productToShow)}>
-          Add To Cart <AiOutlineShoppingCart />
-        </SecondaryButton>
-
-        <SecondaryButton onClick={() => addItemToWishlist(productToShow)}>
-          Add to WishList <AiFillHeart />
-        </SecondaryButton>
+        <div style={{display: 'flex', marginTop: '10px', gap: '8px'}}>
+          <Button onClick={() => addItemToCart(productToShow)}>
+            Add To Cart <AiOutlineShoppingCart />
+          </Button>
+          <Button varient="outlined" onClick={() => addItemToWishlist(productToShow)}>
+            Add to WishList <AiFillHeart />
+          </Button>
+        </div>
       </ProductData>
     </ShowProduct>
   );

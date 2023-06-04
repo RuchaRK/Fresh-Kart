@@ -10,7 +10,7 @@ export const CartContainer = styled.div`
 `;
 
 export const ProductContainer = styled.div`
-  flex: 0.6;
+  flex: 0.7;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -18,19 +18,13 @@ export const ProductContainer = styled.div`
   gap: 20px;
 `;
 
-export const CheckoutContainer = styled.div`
-  flex: 0.4;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
 export const ProductDetails = styled.div`
   display: flex;
   border-radius: 20px;
   box-shadow: rgba(90, 90, 90, 0.35) 0px 5px 15px;
-  width: 90%;
   padding: 10px 10px;
+  background-color: white;
+  width: 100%;
 `;
 
 export const Data = styled.div`
@@ -41,39 +35,6 @@ export const Data = styled.div`
 
 export const TitleContainer = styled.div`
   margin: 20px;
-`;
-export const SecondaryButton = styled.button`
-  border-radius: 10px;
-  border: none;
-  padding: 5px 5px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-  background-color: white; /* Green */
-  border: 1px solid #008cba;
-  color: #008cba;
-  padding: 10px 25px;
-`;
-
-export const PrimaryButton = styled.button`
-  border-radius: 5px;
-  background-color: white; /* Green */
-  border: 1px solid #008cba;
-  color: #008cba;
-  padding: 10px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 10px 4px 0px;
-  cursor: pointer;
-
-  &hover: {
-    background-color: #008cba;
-    color: white;
-  }
 `;
 
 export const ActualPrice = styled.p`
@@ -91,7 +52,6 @@ export const DiscountPrice = styled.p`
 
 export const PriceContainer = styled.div`
   box-shadow: rgba(90, 90, 90, 0.35) 0px 5px 15px;
-  width: 75%;
   border-radius: 15px;
 `;
 
@@ -102,49 +62,27 @@ export const PriceDetails = styled.div`
 
 export const TotalPrice = styled.div`
   display: flex;
-  padding: 10px 10px;
-  margin: 15px 10px;
   justify-content: space-between;
 `;
 
 export const Discount = styled.div`
   display: flex;
-  padding: 10px 10px;
-  margin: 15px 10px;
   justify-content: space-between;
 `;
 
 export const Delivary = styled.div`
   display: flex;
-  padding: 5px 10px;
-  margin: 5px 10px;
   justify-content: space-between;
   border-bottom: 1px solid #d3d3d3;
 `;
 
 export const AmtToPay = styled.div`
   display: flex;
-  padding: 10px 10px;
-  margin: 10px 10px;
   justify-content: space-between;
   border-bottom: 1px solid #d3d3d3;
 `;
 
-export const CheckoutButton = styled.button`
-  border-radius: 5px;
-  background-color: #008cba;
-  border: 1px solid #008cba;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 10px 10px;
-  margin: 15px 15px;
-
-  &hover: {
-    background-color: #008cba;
-    color: white;
-  }
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 8px;
 `;

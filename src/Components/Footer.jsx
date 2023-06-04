@@ -6,6 +6,7 @@ import {AiOutlineSafety} from 'react-icons/ai';
 import {RiRefund2Line} from 'react-icons/ri';
 import {FcOnlineSupport} from 'react-icons/fc';
 import {routeName} from '../App.routes';
+import {ColorPalette} from '../Color';
 
 const Section = styled.div`
   background: black;
@@ -36,7 +37,7 @@ const FooterContainerThree = styled.div`
 `;
 
 const Container = styled.div`
-  background: transparent linear-gradient(180deg, #27a84a 0%, #197832 100%) 0% 0% no-repeat
+  background: ${ColorPalette.secondary.main};
     padding-box;
   display: flex;
   padding: 20px 0px;
