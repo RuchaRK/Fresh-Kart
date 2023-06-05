@@ -18,7 +18,7 @@ export function SignIn() {
 
   const handleSignUp = (token) => {
     login(token);
-    toast.success('SignedIn Successfully');
+    toast.success('Signed-In Successfully');
     navigate('/');
   };
 

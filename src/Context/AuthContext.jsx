@@ -12,12 +12,12 @@ export function AuthContextProvider({children}) {
   const login = (token) => {
     setIsLoggedIn(true);
     setloginToken(token);
-    toast.success('LoggedIn Successfully');
+    toast.success('Logged-In Successfully');
   };
   const logout = () => {
     setIsLoggedIn(false);
     clearLoginToken();
-    toast.success('LoggedOut Successfully');
+    toast.success('Logged-Out Successfully');
   };
 
   return (
