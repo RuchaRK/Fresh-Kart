@@ -26,7 +26,7 @@ const PasswordInput = styled.input`
 `;
 export function PasswordField({...props}) {
   const [showPassword, setShowPassword] = useState(false);
-  console.log(showPassword);
+
   return (
     <PasswordContainer>
       <PasswordInput {...props} type={showPassword ? 'text' : 'password'} />

@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {AiOutlineHeart, AiFillHeart, AiOutlineShoppingCart} from 'react-icons/ai';
 import {Link, useLocation} from 'react-router-dom';
 import {Filter} from './Filter';
@@ -14,6 +14,9 @@ import {ColorPalette} from '../../Color';
 import {Button} from '../../Components/Button';
 import {MIN_PRICE_RANGE_VALUE} from './constant';
 import {ProductCard} from '../../Components/ProductCard';
+import {useFetch} from '../../useFetch';
+import {Loader} from '../../Components/Loader';
+import {PageError} from '../../Components/PageError';
 
 export function Products() {
   const {state} = useLocation();
@@ -31,19 +34,15 @@ export function Products() {
   const {addItemToCart, addItemToWishlist, cartData, wishListData, removeFromWishlist} =
     useContext(CounterContext);
 
-  const fetchData = async () => {
-    try {
-      const data = await fetch('/api/products');
-      const response = await data.json();
-      setProductsData(response.products);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const {data, isError, isLoading} = useFetch({url: '/api/products', methodType: 'GET'});
+  if (isLoading) {
+    return <Loader />;
+  }
+  if (isError) {
+    return <PageError />;
+  }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  setProductsData(data.products);
 
   const filteredData = productsData
     .filter(
@@ -85,7 +84,7 @@ export function Products() {
                   onClick={() => addItemToCart(good)}
                   icon={<AiOutlineShoppingCart size={16} />}
                 >
-                  Add To Cart
+                  Add to Cart
                 </Button>
               )
             }

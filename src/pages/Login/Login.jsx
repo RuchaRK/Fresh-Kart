@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react';
 import {useLocation, useNavigate, Link} from 'react-router-dom';
-import {ToastContainer, toast} from 'react-toastify';
 import {AuthContext} from '../../Context/AuthContext';
 import {Button} from '../../Components/Button';
 import {CounterContext} from '../../Context/CounterContext';
@@ -53,6 +52,7 @@ export function Login() {
         handleLogin(data.encodedToken);
       }
     } catch (error) {
+      console.error(error);
     } finally {
       setIsLoading(false);
     }

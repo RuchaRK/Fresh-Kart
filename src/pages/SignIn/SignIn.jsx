@@ -1,12 +1,13 @@
 import React, {useContext, useState} from 'react';
-import styled from '@emotion/styled';
 import {useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 import {AuthContext} from '../../Context/AuthContext';
 import {Button} from '../../Components/Button';
-import {ColorPalette} from '../../Color';
 import {Input, InputContainer} from '../../Components/Input';
 import {Container} from '../Login/Login.style';
-import {PasswordContainer, PasswordField} from '../../Components/PasswordField';
+import {PasswordField} from '../../Components/PasswordField';
+import {Loader} from '../../Components/Loader';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function SignIn() {
   const [formData, setFormData] = useState({});
@@ -17,6 +18,7 @@ export function SignIn() {
 
   const handleSignUp = (token) => {
     login(token);
+    toast.success('SignedIn Successfully');
     navigate('/');
   };
 
@@ -45,7 +47,8 @@ export function SignIn() {
         },
       });
       const data = await response.json();
-      if (data.errors.length > 0) {
+
+      if (data.errors && data.errors.length > 0) {
         setErrorMessage('Email already exit');
       }
       if (data.encodedToken) {
@@ -58,7 +61,9 @@ export function SignIn() {
     }
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <form>
       <Container>
         <h1>SignUp</h1>
@@ -103,7 +108,7 @@ export function SignIn() {
           <PasswordField
             type="password"
             placeholder="Enter Password"
-            name="actualPassword"
+            name="password"
             required
             onChange={(event) =>
               setFormData({...formData, [event.target.name]: event.target.value})

@@ -1,15 +1,20 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import PropTypes from 'prop-types';
 import {getLoginToken} from '../LoginLocalStorage';
 import 'react-toastify/dist/ReactToastify.css';
+import {AuthContext} from './AuthContext';
+import {routeName} from '../App.routes';
 
 export const CounterContext = React.createContext();
 
 export function CounterContextProvider({children}) {
   const [wishListData, setwishListData] = useState([]);
   const [cartData, setCartData] = useState([]);
+  const {isLoggedIn} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const incrementQuantity = async (idValue, incrementType) => {
     try {
@@ -34,55 +39,63 @@ export function CounterContextProvider({children}) {
   };
 
   const addItemToCart = async (productToAdd) => {
-    try {
-      const response = await fetch('/api/user/cart', {
-        method: 'POST',
-        body: JSON.stringify({
-          product: {
-            ...productToAdd,
+    if (isLoggedIn) {
+      try {
+        const response = await fetch('/api/user/cart', {
+          method: 'POST',
+          body: JSON.stringify({
+            product: {
+              ...productToAdd,
+            },
+          }),
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: getLoginToken(),
           },
-        }),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          authorization: getLoginToken(),
-        },
-      });
-      const data = await response.json();
-      if (data.cart) {
-        setCartData(data.cart);
-        toast.success('Product Added to cart');
+        });
+        const data = await response.json();
+        if (data.cart) {
+          setCartData(data.cart);
+          toast.success('Product Added to cart');
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error(`${error} occured`);
       }
-    } catch (error) {
-      console.error(error);
-      toast.error(`${error} occured`);
+    } else {
+      navigate(routeName.LOGIN);
     }
   };
 
   const addItemToWishlist = async (productToAdd) => {
-    try {
-      const response = await fetch('/api/user/wishlist', {
-        method: 'POST',
-        body: JSON.stringify({
-          product: {
-            ...productToAdd,
+    if (isLoggedIn) {
+      try {
+        const response = await fetch('/api/user/wishlist', {
+          method: 'POST',
+          body: JSON.stringify({
+            product: {
+              ...productToAdd,
+            },
+          }),
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: getLoginToken(),
           },
-        }),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          authorization: getLoginToken(),
-        },
-      });
-      const data = await response.json();
+        });
+        const data = await response.json();
 
-      if (data.wishlist) {
-        setwishListData(data.wishlist);
-        toast.success('Product Added to WishList');
+        if (data.wishlist) {
+          setwishListData(data.wishlist);
+          toast.success('Product Added to WishList');
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error(`${error} occured`);
       }
-    } catch (error) {
-      console.error(error);
-      toast.error(`${error} occured`);
+    } else {
+      navigate(routeName.LOGIN);
     }
   };
 

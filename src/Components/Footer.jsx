@@ -104,9 +104,30 @@ export function Footer() {
           <FooterContainerTwo>
             <ul style={{listStyle: 'none'}}>
               <li>Connect</li>
-              <li>GitHub</li>
-              <li>Twitter</li>
-              <li>LinkedIn</li>
+              <li>
+                <a
+                  href="https://github.com/RuchaRK"
+                  style={{textDecoration: 'none', color: 'white'}}
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com/ruchakathar"
+                  style={{textDecoration: 'none', color: 'white'}}
+                >
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/ruchakthar/"
+                  style={{textDecoration: 'none', color: 'white'}}
+                >
+                  LinkedIn
+                </a>
+              </li>
             </ul>
           </FooterContainerTwo>
           <FooterContainerThree>

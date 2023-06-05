@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {
@@ -29,7 +28,12 @@ export function Home() {
     <div>
       <MainImage>
         <BackgroundImage />
-        <ImageText>Discover A World of Fresh Flavors at Your Fingertips</ImageText>
+
+        <ImageText>
+          <Link to={routeName.PRODUCTS} style={{textDecoration: 'none', color: 'black'}}>
+            Discover A World of Fresh Flavors at Your Fingertips
+          </Link>
+        </ImageText>
       </MainImage>
 
       <Title>Our Categories</Title>

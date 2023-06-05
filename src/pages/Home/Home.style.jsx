@@ -77,7 +77,7 @@ export const BackgroundImage = styled.div`
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 0.75;
+  opacity: 1.5;
   height: 100%;
 `;
 

@@ -56,7 +56,18 @@ function App() {
           <Route path="*" Component={NotFound} />
         </Routes>
       </PageWrapper>
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

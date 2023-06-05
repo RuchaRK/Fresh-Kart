@@ -60,7 +60,7 @@ export function Navbar() {
   const handleChange = (event) => {
     setSearch(event.target.value);
 
-    navigate('/products');
+    navigate(routeName.PRODUCTS);
   };
 
   return (

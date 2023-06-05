@@ -21,15 +21,12 @@ export const useFetch = ({url, methodType, isAuthenticated}) => {
             }
           : {}),
       });
-      console.log('response', response);
       const fetchedData = await response.json();
       if ((data.errors && data.errors.length > 0) || data.error) {
         setIsError(true);
       } else {
         setData(fetchedData);
       }
-
-      console.log('fetchedData', fetchData);
     } catch (error) {
       console.error(error);
     } finally {
