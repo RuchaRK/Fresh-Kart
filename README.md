@@ -1,7 +1,7 @@
 <div align="center">
   
   
-# FRESH-KART
+# 🛍️ <span style="color:green;">FRESH-KART</span>
   Fresh-kart is an online supermarket for all your daily needs.
 </div>
 
@@ -14,7 +14,7 @@ $ npm install
 $ npm start
 ```
 
-## **Features -**
+## **Features **
 
 - Home page
 - Product listing page
@@ -29,7 +29,7 @@ $ npm start
   - User Signup
   - User Login
 
-## **Built with -**
+## **Built with **
 
 - React JS
 - React Context API
