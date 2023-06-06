@@ -39,6 +39,7 @@ export function Login() {
       });
 
       const data = await response.json();
+      console.log('data', data);
 
       if (data.errors && data.errors.length > 0) {
         setIsError(true);
