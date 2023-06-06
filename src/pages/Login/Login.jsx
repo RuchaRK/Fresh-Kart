@@ -46,8 +46,8 @@ export function Login() {
         return;
       }
 
-      setCartData(data.foundUser.cart);
-      setwishListData(data.foundUser.wishlist);
+      // setCartData(data.foundUser.cart);
+      // setwishListData(data.foundUser.wishlist);
 
       if (data.encodedToken) {
         handleLogin(data.encodedToken);
