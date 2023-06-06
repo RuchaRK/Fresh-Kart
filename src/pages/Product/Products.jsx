@@ -63,7 +63,7 @@ export function Products() {
   if (filterValue.sort === 'asc') {
     filteredData.sort((a, b) => a.price - b.price);
   }
-  if (filterValue.sort === 'dsc') {
+  if (filterValue.sort === 'desc') {
     filteredData.sort((a, b) => b.price - a.price);
   }
 
