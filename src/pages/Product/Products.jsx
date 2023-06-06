@@ -67,8 +67,6 @@ export function Products() {
     filteredData.sort((a, b) => b.price - a.price);
   }
 
-  console.log(filteredData);
-
   return (
     <Container>
       <Filter

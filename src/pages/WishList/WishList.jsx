@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from 'react';
-import {AiOutlineShoppingCart} from 'react-icons/ai';
+import {AiOutlineShoppingCart, AiOutlineDelete} from 'react-icons/ai';
 import {Link} from 'react-router-dom';
 import {getLoginToken} from '../../LoginLocalStorage';
 import {CounterContext} from '../../Context/CounterContext';
@@ -7,6 +7,7 @@ import {Container} from './Wishlist.style';
 import {Button} from '../../Components/Button';
 import {ProductCard} from '../../Components/ProductCard';
 import {routeName} from '../../App.routes';
+import {IconButton} from '../../Components/IconButton';
 
 export function WishList() {
   const {
@@ -69,6 +70,11 @@ export function WishList() {
                 </Button>
               }
               product={productDetails}
+              deleteIconButton={
+                <IconButton onClick={() => removeFromWishlist(productDetails._id)}>
+                  <AiOutlineDelete size={18} />
+                </IconButton>
+              }
             />
           ))}
         </Container>

@@ -56,7 +56,7 @@ export const IconContainer = styled.span`
   top: 5px;
   right: 5px;
 `;
-export function ProductCard({button, product, wishListIconButton}) {
+export function ProductCard({button, product, wishListIconButton, deleteIconButton}) {
   return (
     <CardContainer>
       <div style={{margin: '15px 0px'}}>
@@ -87,7 +87,9 @@ export function ProductCard({button, product, wishListIconButton}) {
 
         {button}
       </Data>
+
       {wishListIconButton && <IconContainer>{wishListIconButton}</IconContainer>}
+      {deleteIconButton && <IconContainer>{deleteIconButton}</IconContainer>}
     </CardContainer>
   );
 }
