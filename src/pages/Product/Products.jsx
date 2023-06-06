@@ -52,7 +52,13 @@ export function Products() {
       filterValue.category.length > 0 ? filterValue.category.includes(item.categoryName) : true,
     )
     .filter((item) => (filterValue.rating > 0 ? item.rating >= filterValue.rating : true))
-    .filter((item) => item.name.toLowerCase().includes(search));
+    .filter((item) => {
+      if (item.name.toLowerCase().includes(search)) {
+        return item;
+      }
+
+      return false;
+    });
 
   if (filterValue.sort === 'asc') {
     filteredData.sort((a, b) => a.price - b.price);
@@ -60,6 +66,8 @@ export function Products() {
   if (filterValue.sort === 'dsc') {
     filteredData.sort((a, b) => b.price - a.price);
   }
+
+  console.log(filteredData);
 
   return (
     <Container>
@@ -69,43 +77,47 @@ export function Products() {
         initialState={initialState}
       />
       <Content>
-        {filteredData.map((good) => (
-          <ProductCard
-            button={
-              cartData.find((item) => item._id === good._id) ? (
-                <Link to={routeName.CART} style={{textDecoration: 'none'}}>
-                  <Button varient="outlined" fullWidth icon={<AiOutlineShoppingCart size={16} />}>
-                    Go to Cart
-                  </Button>
-                </Link>
-              ) : (
-                <Button
-                  fullWidth
-                  onClick={() => addItemToCart(good)}
-                  icon={<AiOutlineShoppingCart size={16} />}
-                >
-                  Add to Cart
-                </Button>
-              )
-            }
-            product={good}
-            wishListIconButton={
-              <IconButton
-                onClick={() =>
-                  wishListData.find((item) => item._id === good._id)
-                    ? removeFromWishlist(good._id)
-                    : addItemToWishlist(good)
-                }
-              >
-                {wishListData.find((item) => item._id === good._id) ? (
-                  <AiFillHeart fill={ColorPalette.primary.main} size={24} />
+        {filteredData.length > 0 ? (
+          filteredData.map((good) => (
+            <ProductCard
+              button={
+                cartData.find((item) => item._id === good._id) ? (
+                  <Link to={routeName.CART} style={{textDecoration: 'none'}}>
+                    <Button varient="outlined" fullWidth icon={<AiOutlineShoppingCart size={16} />}>
+                      Go to Cart
+                    </Button>
+                  </Link>
                 ) : (
-                  <AiOutlineHeart size={24} />
-                )}
-              </IconButton>
-            }
-          />
-        ))}
+                  <Button
+                    fullWidth
+                    onClick={() => addItemToCart(good)}
+                    icon={<AiOutlineShoppingCart size={16} />}
+                  >
+                    Add to Cart
+                  </Button>
+                )
+              }
+              product={good}
+              wishListIconButton={
+                <IconButton
+                  onClick={() =>
+                    wishListData.find((item) => item._id === good._id)
+                      ? removeFromWishlist(good._id)
+                      : addItemToWishlist(good)
+                  }
+                >
+                  {wishListData.find((item) => item._id === good._id) ? (
+                    <AiFillHeart fill={ColorPalette.primary.main} size={24} />
+                  ) : (
+                    <AiOutlineHeart size={24} />
+                  )}
+                </IconButton>
+              }
+            />
+          ))
+        ) : (
+          <h2> Sorry, Product not avaliable.</h2>
+        )}
       </Content>
     </Container>
   );
