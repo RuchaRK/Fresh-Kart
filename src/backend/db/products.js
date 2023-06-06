@@ -159,7 +159,7 @@ export const products = [
     shelfLife: '2days',
     packageWith: '',
     image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Fresh_made_bread_05.jpg/1200px-Fresh_made_bread_05.jpg',
+      'https://cdn.shopify.com/s/files/1/0279/6329/3831/products/brown_bread_6faa3679-7906-49ce-899f-dff72ba56ff5_grande.jpg?v=1600680069',
   },
   {
     _id: uuid(),
