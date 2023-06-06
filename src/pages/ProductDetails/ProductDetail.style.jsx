@@ -37,7 +37,8 @@ export const PageTitle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 50%;
+
+  gap: 10px;
   align-items: baseline;
 `;
 
@@ -72,7 +73,6 @@ export const DiscountPrice = styled.p`
   color: black;
   font-size: 17px;
   font-weight: bold;
-  margin-bottom: 20px;
 `;
 
 export const InfoStyle = styled.p`

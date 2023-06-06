@@ -3,7 +3,7 @@ import {ColorPalette} from '../../Color';
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 100px;
   margin: 32px;
