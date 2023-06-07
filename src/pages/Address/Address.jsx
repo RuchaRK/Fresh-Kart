@@ -27,7 +27,7 @@ const initialAddress = [
 export function Address() {
   const [showModal, setShowModal] = useState(false);
   const [address, setAddress] = useState(initialAddress);
-  const [selectedAddress, setSelectedAddress] = useState(initialAddress[0]);
+  const [selectedAddressId, setSelectedAddressId] = useState(initialAddress[0]._id);
 
   const insertAddress = (obj) => {
     setAddress(address.concat({...obj, _id: uuid()}));
@@ -39,8 +39,8 @@ export function Address() {
 
   const deleteAddress = (idValue) => {
     setAddress(address.filter((item) => item._id !== idValue));
-    if (idValue === selectedAddress._id) {
-      setSelectedAddress(address[0]);
+    if (idValue === selectedAddressId) {
+      setSelectedAddressId(address[0]._id);
     }
   };
 
@@ -69,8 +69,8 @@ export function Address() {
                     <input
                       type="radio"
                       name="radio"
-                      checked={selectedAddress._id === item._id}
-                      onClick={() => setSelectedAddress(item)}
+                      checked={selectedAddressId === item._id}
+                      onClick={() => setSelectedAddressId(item._id)}
                     />
                     <h3>{item.name}</h3>
                   </div>
@@ -109,7 +109,10 @@ export function Address() {
           </div>
         </AddressWrapper>
 
-        <OrderDetails showOrderDetails address={selectedAddress} />
+        <OrderDetails
+          showOrderDetails
+          address={address.find((item) => item._id === selectedAddressId)}
+        />
 
         <Modal open={showModal} closeModal={() => setShowModal(false)}>
           <AddressForm onSave={insertAddress} closeModal={() => setShowModal(false)} />

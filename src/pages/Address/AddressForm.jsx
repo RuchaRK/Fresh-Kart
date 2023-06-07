@@ -15,6 +15,14 @@ const Container = styled.div`
 export function AddressForm({onSave, closeModal, initialValues}) {
   const [addressObject, setAddressObject] = useState(initialValues ?? {});
 
+  const isSaveButtonDisable =
+    !addressObject.name ||
+    !addressObject.addressLine1 ||
+    !addressObject.city ||
+    !addressObject.state ||
+    !addressObject.pinCode ||
+    !addressObject.mobileNo;
+
   const handleOnChange = (event) => {
     setAddressObject({...addressObject, [event.target.name]: event.target.value});
   };
@@ -97,6 +105,8 @@ export function AddressForm({onSave, closeModal, initialValues}) {
             Cancel
           </Button>
           <Button
+            type="submit"
+            disabled={isSaveButtonDisable}
             onClick={(event) => {
               event.preventDefault();
               onSave(addressObject);
